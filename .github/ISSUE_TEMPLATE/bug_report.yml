@@ -1,0 +1,22 @@
+﻿name: Bug report
+description: Report a reproducible problem
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes: {label: What happened?, description: Include exact error and expected result}
+    validations: {required: true}
+  - type: textarea
+    id: repro
+    attributes: {label: Steps to reproduce}
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes: {label: BigZ OS version and Windows build}
+    validations: {required: true}
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - {label: I did not attach Windows ISOs, images, secrets, or personal data., required: true}
