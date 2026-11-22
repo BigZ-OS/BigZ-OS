@@ -26,8 +26,8 @@ Get-BigZTweakPlan -CatalogPath .\shared\tweaks -Edition dev -Id explorer.show-fi
 .\builder\Build-BigZIso.ps1 -Plan -Profile balanced
 .\toolbox\Start-BigZToolbox.ps1 -Plan -Edition dev -Id explorer.show-file-extensions
 
-Import-Module Pester -RequiredVersion 3.4.0
-Invoke-Pester -Script @(
+Import-Module Pester -RequiredVersion 5.7.1
+Invoke-Pester -Path @(
     '.\tests\unit\BigZ.Tweaks.Tests.ps1',
     '.\tests\integration\Build-BigZIso.Tests.ps1'
 )

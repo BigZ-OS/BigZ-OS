@@ -61,8 +61,8 @@ A recuperação descarrega a hive do job, descarta sua montagem identificada do 
 Os testes locais usam arquivos temporários e substituem montagem, DISM, registry offline e oscdimg por simulações:
 
 ```powershell
-Import-Module Pester -RequiredVersion 3.4.0
-Invoke-Pester -Script @(
+Import-Module Pester -RequiredVersion 5.7.1
+Invoke-Pester -Path @(
     '.\tests\unit\BigZ.Tweaks.Tests.ps1',
     '.\tests\unit\BigZ.Media.Tests.ps1',
     '.\tests\integration\Build-BigZIso.Tests.ps1'
