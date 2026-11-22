@@ -15,7 +15,11 @@ $script:BigZRegistryPolicy = @{
     'HKCU\Software\Microsoft\Windows\CurrentVersion\Search' = @{ SearchboxTaskbarMode = 0 }
     'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize' = @{ EnableTransparency = 0 }
 }
-$script:BigZOfflinePackages = @('Microsoft.BingNews', 'Clipchamp.Clipchamp', 'Microsoft.MicrosoftSolitaireCollection')
+$script:BigZOfflinePackages = @{
+    'Microsoft.BingNews' = '8wekyb3d8bbwe'
+    'Clipchamp.Clipchamp' = 'yxz26nhyzhsrt'
+    'Microsoft.MicrosoftSolitaireCollection' = '8wekyb3d8bbwe'
+}
 
 function Read-BigZJson {
     param([string]$Path)
@@ -93,6 +97,43 @@ function Assert-BigZRegistryAction {
     }
 }
 
+function Get-BigZAppxPublisher {
+    param([string]$PackageName)
+
+    if ($PackageName -cnotin $script:BigZOfflinePackages.Keys) {
+        throw "Pacote fora da lista Appx permitida: '$PackageName'."
+    }
+    return $script:BigZOfflinePackages[$PackageName]
+}
+
+function Assert-BigZOfflineAction {
+    param($Action)
+
+    Assert-BigZObjectShape $Action @('type') @('packageName', 'hive', 'key', 'name', 'valueType', 'value') 'ação offline'
+    switch -CaseSensitive ($Action.type) {
+        'appx.deprovision' {
+            Assert-BigZObjectShape $Action @('type', 'packageName') -Label 'ação Appx offline'
+            if ($Action.packageName -isnot [string]) { throw 'Identidade Appx inválida.' }
+            $null = Get-BigZAppxPublisher $Action.packageName
+        }
+        'registry.setOfflineValue' {
+            Assert-BigZObjectShape $Action @('type', 'hive', 'key', 'name', 'valueType', 'value') -Label 'registro offline'
+            foreach ($argument in @($Action.hive, $Action.key, $Action.name, $Action.valueType)) {
+                if ($argument -isnot [string]) { throw 'Campo de registro offline inválido.' }
+            }
+            $profileMarker = $Action.hive -ceq 'software' -and $Action.key -ceq 'BigZOS' -and
+                $Action.name -ceq 'Profile' -and $Action.valueType -ceq 'String' -and
+                $Action.value -is [string] -and $Action.value -cin $script:BigZEditions
+            $defaultPreference = $Action.hive -ceq 'defaultUser' -and
+                $Action.key -ceq 'Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -and
+                $Action.name -ceq 'HideFileExt' -and $Action.valueType -ceq 'DWord' -and
+                (Test-BigZInteger $Action.value) -and $Action.value -eq 0
+            if (-not ($profileMarker -or $defaultPreference)) { throw 'Valor de registro offline fora da lista permitida.' }
+        }
+        default { throw 'Tipo de ação offline desconhecido.' }
+    }
+}
+
 function Assert-BigZTweak {
     param($Tweak, [string]$Label)
 
@@ -134,7 +175,7 @@ function Assert-BigZTweak {
     } -RequireItem
     if ($Tweak.requires.admin -isnot [bool]) { throw "admin deve ser booleano em $Label." }
 
-    Assert-BigZObjectShape $Tweak.action @('type') @('key', 'name', 'valueType', 'value', 'packageName') "$Label.action"
+    Assert-BigZObjectShape $Tweak.action @('type') @('key', 'name', 'valueType', 'value', 'packageName', 'hive') "$Label.action"
     Assert-BigZObjectShape $Tweak.verify @('type') -Label "$Label.verify"
     Assert-BigZObjectShape $Tweak.rollback @('type') -Label "$Label.rollback"
     foreach ($type in @($Tweak.action.type, $Tweak.verify.type, $Tweak.rollback.type, $Tweak.phase, $Tweak.scope)) {
@@ -150,11 +191,18 @@ function Assert-BigZTweak {
             }
         }
         'appx.deprovision' {
-            Assert-BigZObjectShape $Tweak.action @('type', 'packageName') -Label "$Label.action"
-            if ($Tweak.action.packageName -isnot [string] -or $Tweak.action.packageName -cnotin $script:BigZOfflinePackages -or
-                $Tweak.phase -cne 'offline' -or $Tweak.scope -cne 'image' -or -not $Tweak.requires.admin -or
+            Assert-BigZOfflineAction $Tweak.action
+            if ($Tweak.phase -cne 'offline' -or $Tweak.scope -cne 'image' -or -not $Tweak.requires.admin -or
                 $Tweak.verify.type -cne 'appx.absent' -or $Tweak.rollback.type -cne 'rebuildImage') {
-                throw "Pacote ou contrato de imagem fora da política v0 em $Label."
+                throw "Contrato de imagem inválido em $Label."
+            }
+        }
+        'registry.setOfflineValue' {
+            Assert-BigZOfflineAction $Tweak.action
+            if ($Tweak.action.hive -cne 'defaultUser' -or $Tweak.phase -cne 'offline' -or
+                $Tweak.scope -cne 'defaultUser' -or -not $Tweak.requires.admin -or
+                $Tweak.verify.type -cne 'registry.matchesAction' -or $Tweak.rollback.type -cne 'rebuildImage') {
+                throw "Contrato de registro offline inválido em $Label."
             }
         }
         default { throw "Tipo de ação desconhecido em $Label." }

@@ -4,7 +4,7 @@
     GUID = 'cbf8b397-0c3e-449c-ba38-93951c86db50'
     PowerShellVersion = '5.1'
     CompatiblePSEditions = @('Desktop')
-    FunctionsToExport = @('Get-BigZTweakPlan', 'Invoke-BigZTweak', 'Test-BigZTweak', 'Undo-BigZTweak')
+    FunctionsToExport = @('Get-BigZTweakPlan', 'Invoke-BigZTweak', 'Test-BigZTweak', 'Undo-BigZTweak', 'Assert-BigZOfflineAction', 'Get-BigZAppxPublisher')
     CmdletsToExport = @()
     AliasesToExport = @()
     VariablesToExport = @()

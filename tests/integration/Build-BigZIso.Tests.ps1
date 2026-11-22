@@ -30,9 +30,18 @@
         (Get-FileHash -LiteralPath $fake).Hash | Should Be $expectedHash
     }
 
-    It 'rejeita execução fora de -Plan e índice sem entrada' {
+    It 'rejeita execução sem indicar modo e índice sem entrada' {
         { & $builder -Profile dev } | Should Throw
         { & $builder -Plan -ImageIndex 1 } | Should Throw
+    }
+
+    It 'preserva a prévia estática e checa o SHA-256 quando informado' {
+        $source = Join-Path $TestDrive 'hash-source.iso'
+        [IO.File]::WriteAllBytes($source, [byte[]]@(0, 1, 2, 3))
+        $expected = (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash
+        (& $builder -Plan -IsoPath $source -ExpectedSha256 $expected).Source.ReferenceSha256Matched | Should Be $true
+        { & $builder -Plan -IsoPath $source -ExpectedSha256 ('a' * 64) } | Should Throw
+        { & $builder -Build -IsoPath $source -OutputPath (Join-Path $TestDrive 'unclear.iso') } | Should Throw
     }
 
     It 'rejeita herança circular antes de carregar mídia' {

@@ -151,11 +151,20 @@ function Get-BigZProfilePlan {
         Id = $Id
         Inheritance = @($chain.id)
         Target = [pscustomobject]@{
-            WindowsRelease = '25H2'
+            WindowsRelease = '25H2/26H2'
             Build = 26200
+            SupportedBuilds = @(26200, 26300)
             Architecture = 'x64'
             WindowsEditions = @('Core', 'Professional')
             Firmware = 'UEFI'
+        }
+        ProfileMarker = [pscustomobject]@{
+            type = 'registry.setOfflineValue'
+            hive = 'software'
+            key = 'BigZOS'
+            name = 'Profile'
+            valueType = 'String'
+            value = $Id
         }
         OfflineTweaks = $offline.Items
         FirstUseDefaults = $online.Items

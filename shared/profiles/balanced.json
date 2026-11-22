@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "balanced",
   "base": "base",
-  "offlineTweaks": [],
+  "offlineTweaks": ["appx.remove-news"],
   "optionalTweaks": [
     "explorer.show-file-extensions"
   ]

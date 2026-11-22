@@ -1,5 +1,7 @@
 # BigZ OS — Status de Engenharia F0/F1
 
+Para o fluxo posterior que gera mídia, consulte o [runbook F2 do builder](../builder/README.md).
+
 O esqueleto local, o motor de ajustes e o planejador da ISO estão implementados. Os 20 testes Pester passaram no Windows PowerShell 5.1, com estado de registro em memória e arquivos temporários isolados. A chamada `-Plan` da Toolbox também retornou um ajuste pelo motor real em modo declarativo.
 
 ## O que funciona

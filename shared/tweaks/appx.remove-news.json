@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "appx.remove-news",
+  "description": "Remover o provisionamento do Microsoft News quando presente no instalador.",
+  "risk": "medium",
+  "securityImpact": "none",
+  "source": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options?view=windows-11",
+  "editions": [
+    "balanced"
+  ],
+  "phase": "offline",
+  "scope": "image",
+  "requires": {
+    "builds": [
+      26200,
+      26300
+    ],
+    "architectures": [
+      "x64"
+    ],
+    "admin": true
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "action": {
+    "type": "appx.deprovision",
+    "packageName": "Microsoft.BingNews"
+  },
+  "verify": {
+    "type": "appx.absent"
+  },
+  "rollback": {
+    "type": "rebuildImage"
+  },
+  "restart": "none"
+}

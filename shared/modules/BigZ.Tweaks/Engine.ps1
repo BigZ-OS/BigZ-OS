@@ -19,6 +19,8 @@
         Assert-BigZAdapter $Adapter
     }
 
+    $acceptedBuilds = @(26200)
+    if ($phase -ceq 'offline') { $acceptedBuilds += 26300 }
     $targets = @{}
     $items = foreach ($tweakId in $order) {
         $tweak = $Catalog[$tweakId]
@@ -28,7 +30,7 @@
         $problems = @(
             if ($tweak.phase -cne $phase) { 'Fase incompatível.' }
             if ($edition -cnotin $tweak.editions) { 'Edição BigZ incompatível.' }
-            if (26200 -notin $tweak.requires.builds) { 'Build fora da matriz v0.' }
+            if (-not @($tweak.requires.builds | Where-Object { $_ -in $acceptedBuilds }).Count) { 'Build fora da matriz v0.' }
             if ($tweak.risk -ceq 'high') { 'Risco alto bloqueado pela política v0.' }
             if ($tweak.securityImpact -cne 'none') { 'Redução de proteção bloqueada pela política v0.' }
             foreach ($conflict in $tweak.conflictsWith) {
@@ -39,6 +41,9 @@
         if ($tweak.action.type -ceq 'registry.setValue') {
             $target = "$($tweak.action.key)|$($tweak.action.name)"
             $desired = Get-BigZDesiredState $tweak.action
+        }
+        elseif ($tweak.action.type -ceq 'registry.setOfflineValue') {
+            $target = "$($tweak.action.hive)|$($tweak.action.key)|$($tweak.action.name)"
         }
         else {
             $target = $tweak.action.packageName
@@ -73,6 +78,7 @@
             SecurityImpact = $tweak.securityImpact
             Source = $tweak.source
             Restart = $tweak.restart
+            Requires = $tweak.requires
             Action = $tweak.action
             Verify = $tweak.verify
             Rollback = $tweak.rollback

@@ -72,7 +72,8 @@
     "scope": {
       "enum": [
         "currentUser",
-        "image"
+        "image",
+        "defaultUser"
       ]
     },
     "requires": {
@@ -258,6 +259,79 @@
           "properties": {
             "type": {
               "const": "appx.absent"
+            }
+          }
+        },
+        "rollback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "rebuildImage"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "phase": {
+          "const": "offline"
+        },
+        "scope": {
+          "const": "defaultUser"
+        },
+        "requires": {
+          "properties": {
+            "admin": {
+              "const": true
+            }
+          }
+        },
+        "action": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "hive",
+            "key",
+            "name",
+            "valueType",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "registry.setOfflineValue"
+            },
+            "hive": {
+              "const": "defaultUser"
+            },
+            "key": {
+              "const": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced"
+            },
+            "name": {
+              "const": "HideFileExt"
+            },
+            "valueType": {
+              "const": "DWord"
+            },
+            "value": {
+              "const": 0
+            }
+          }
+        },
+        "verify": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "registry.matchesAction"
             }
           }
         },
