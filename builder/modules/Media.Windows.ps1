@@ -174,7 +174,12 @@ function Open-BigZWim {
 }
 
 function Get-BigZMountedImage {
-    param($Job)
+    param($Job, [switch]$CleanupCheck)
+    if ($CleanupCheck) {
+        $cleanupLog = Get-BigZLocalPath (Join-Path $Job.Path 'cleanup-dism.log')
+        Dism\Get-WindowsImage -Mounted -LogPath $cleanupLog -ErrorAction Stop
+        return
+    }
     $dismOptions = Get-BigZDismOption $Job
     Dism\Get-WindowsImage -Mounted @dismOptions
 }

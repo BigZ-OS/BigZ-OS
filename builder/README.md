@@ -4,7 +4,7 @@ O builder usa uma ISO oficial fornecida pelo usuário e gera mídia local UEFI x
 
 ## Preparação
 
-Use Windows PowerShell 5.1 x64 e instale **Deployment Tools** do Windows ADK oficial, que inclui `oscdimg`. Abra a sessão **como administrador** para `-Build`, `-Plan -InspectMedia` ou `-RecoverJob`. O script solicita o procedimento no erro de pré-requisito. O builder não abre o UAC por conta própria. [Windows ADK](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install/)
+Use Windows PowerShell 5.1 x64 e instale **Deployment Tools** do Windows ADK oficial, que inclui `oscdimg`. Abra a sessão **como administrador** para `-Build`, `-Plan -InspectMedia`, `-RecoverJob` ou para executar a exclusão em `-CleanupJob`. O script solicita o procedimento no erro de pré-requisito. O builder não abre o UAC por conta própria. [Windows ADK](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install/)
 
 Use `C:\DEV\BigZ-Lab\iso\` para a mídia de entrada, `C:\DEV\BigZ-Lab\work\` para jobs e `C:\DEV\BigZ-Lab\out\` para saídas. A cópia de trabalho e a saída exigem espaço livre em volumes NTFS locais. O builder processa um job por vez. Para registrar a comparação com uma referência oficial, informe seu valor com `-ExpectedSha256`. O hash calculado sem referência identifica o arquivo lido. [Página oficial do Windows 11](https://www.microsoft.com/software-download/windows11)
 
@@ -57,6 +57,15 @@ Após interrupção, encontre o ID mostrado no erro ou no diretório `work\job-�
 ```
 
 A recuperação descarrega a hive do job, descarta sua montagem identificada do WIM e desconecta a ISO quando o dispositivo coincide com o diário. Se a propriedade da montagem estiver incerta, preserve o job e use a mensagem e `dism.log` para diagnosticar. Se o diário já indica os três recursos liberados, a recuperação apenas registra o estado `recovered`. Em ambos os casos, `-RecoverJob` preserva os logs, o payload de trabalho e os arquivos em `out`, inclusive uma eventual pasta `.bigz-<ID>` com a ISO parcial. Uma nova execução usa outro job e parte da ISO original. O mesmo comando pode ser repetido se a ISO final, o manifesto e o checksum ainda não existirem.
+
+Para liberar o espaço de um job `failed` ou `recovered`, use `-CleanupJob`. A prévia funciona sem elevação. A execução exige confirmação e uma sessão elevada para conferir o inventário de montagens WIM e se a hive do job ainda está carregada.
+
+```powershell
+.\builder\Build-BigZIso.ps1 -CleanupJob '<GUID-do-job>' -WorkRoot 'C:\DEV\BigZ-Lab\work' -WhatIf
+.\builder\Build-BigZIso.ps1 -CleanupJob '<GUID-do-job>' -WorkRoot 'C:\DEV\BigZ-Lab\work' -Confirm
+```
+
+A limpeza exclui somente `media`, `mount` e `scratch` dentro do job indicado. O diário recebe o estado `cleaned`, e os logs, a ISO de origem e tudo em `out` ficam preservados. Se o diário indicar um recurso pendente, execute `-RecoverJob` primeiro. Se houver erro durante a exclusão, o diário conserva o estado anterior e o comando pode ser repetido após resolver a causa. Links e pontos de montagem nas pastas de trabalho bloqueiam a limpeza.
 
 `oscdimg.exe`, `reg.exe` e `robocopy.exe` gravam stdout e stderr nos logs do job. As mensagens de falha indicam a etapa, o código de saída quando disponível e o final do log, mesmo sob `$ErrorActionPreference = 'Stop'`. O DISM e a montagem de mídia usam cmdlets com tratamento de erros próprio.
 

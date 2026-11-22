@@ -180,19 +180,41 @@ function Exit-BigZMediaLock {
     finally { $Mutex.Dispose() }
 }
 
-function Clear-BigZJobPayload {
+function Get-BigZJobPayloadPath {
     param($Job)
 
-    foreach ($name in @('media', 'mount', 'scratch')) {
-        $candidate = Get-BigZLocalPath (Join-Path $Job.Path $name)
-        if ([IO.Path]::GetDirectoryName($candidate) -ine $Job.Path) {
-            throw 'Pasta de limpeza fora do job.'
+    $jobPath = Get-BigZLocalPath $Job.Path
+    $directories = @(Get-ChildItem -LiteralPath $jobPath -Force -ErrorAction Stop |
+        Where-Object { $_.Name -in @('media', 'mount', 'scratch') })
+    foreach ($directory in $directories) {
+        $candidate = Get-BigZLocalPath $directory.FullName
+        if ([IO.Path]::GetDirectoryName($candidate) -ine $jobPath -or -not $directory.PSIsContainer -or
+            (Test-BigZWithinPath $Job.Record.SourcePath $candidate)) {
+            throw "Pasta de limpeza incompatível com o job: '$candidate'."
         }
-        if (Test-Path -LiteralPath $candidate -PathType Container) {
-            $links = @(Get-ChildItem -LiteralPath $candidate -Recurse -Force -ErrorAction Stop |
-                Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint } | Select-Object -First 1)
-            if ($links.Count) { throw "Ponto de junção preservado em '$candidate'." }
-            Remove-Item -LiteralPath $candidate -Recurse -Force -ErrorAction Stop
+
+        # Inspect one level at a time so enumeration never follows a junction in the payload.
+        $pending = [Collections.Generic.Stack[IO.FileSystemInfo]]::new()
+        $pending.Push($directory)
+        while ($pending.Count) {
+            $item = $pending.Pop()
+            if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
+                throw "Link ou ponto de montagem preservado em '$($item.FullName)'."
+            }
+            if ($item -is [IO.DirectoryInfo]) {
+                foreach ($child in (Get-ChildItem -LiteralPath $item.FullName -Force -ErrorAction Stop)) {
+                    $pending.Push($child)
+                }
+            }
         }
+    }
+    $directories | ForEach-Object { $_.FullName }
+}
+
+function Clear-BigZJobPayload {
+    param([string[]]$Path)
+
+    foreach ($directory in $Path) {
+        Remove-Item -LiteralPath $directory -Recurse -Force -Confirm:$false -ErrorAction Stop
     }
 }

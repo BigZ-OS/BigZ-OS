@@ -5,13 +5,20 @@
     $null = Invoke-BigZNativeCommand $Tools.Reg $ArgumentList $log
 }
 
+function Test-BigZOfflineHiveLoaded {
+    param($Job)
+
+    $key = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($Job.HiveName, $false)
+    if ($null -eq $key) { return $false }
+    $key.Dispose()
+    return $true
+}
+
 function Close-BigZOfflineHive {
     param($Job, $Tools)
 
     if (-not $Job.Record.HiveLoadRequested) { return }
-    $key = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($Job.HiveName, $false)
-    if ($null -ne $key) {
-        $key.Dispose()
+    if (Test-BigZOfflineHiveLoaded $Job) {
         if (-not (Get-BigZOwnedWimMount $Job)) { throw 'Hive carregada sem montagem WIM do job correspondente.' }
         Invoke-BigZHiveCommand $Tools @('unload', "HKLM\$($Job.HiveName)") $Job
     }

@@ -6,4 +6,4 @@
 . (Join-Path $PSScriptRoot 'Media.Offline.ps1')
 . (Join-Path $PSScriptRoot 'Media.Build.ps1')
 
-Export-ModuleMember -Function Assert-BigZElevation, Invoke-BigZMediaBuild, Restore-BigZMediaJob
+Export-ModuleMember -Function Assert-BigZElevation, Invoke-BigZMediaBuild, Restore-BigZMediaJob, Clear-BigZMediaJob

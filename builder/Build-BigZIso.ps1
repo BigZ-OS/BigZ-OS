@@ -5,6 +5,7 @@ param(
     [switch]$Build,
     [switch]$InspectMedia,
     [guid]$RecoverJob,
+    [guid]$CleanupJob,
     [Alias('Profile')][ValidateSet('dev', 'balanced', 'full-performance')][string]$EditionProfile = 'balanced',
     [string]$IsoPath,
     [ValidateRange(1, 2147483647)][int]$ImageIndex,
@@ -22,16 +23,26 @@ param(
 
 Set-StrictMode -Version Latest
 $recovery = $PSBoundParameters.ContainsKey('RecoverJob')
-$modes = @($Plan, $Build, $recovery | Where-Object { $_ })
+$cleanup = $PSBoundParameters.ContainsKey('CleanupJob')
+$modes = @($Plan, $Build, $recovery, $cleanup | Where-Object { $_ })
 if ($modes.Count -ne 1 -or ($InspectMedia -and -not $Plan)) {
-    throw 'Escolha exatamente um modo: -Plan, -Build ou -RecoverJob. -InspectMedia acompanha -Plan.'
+    throw 'Escolha exatamente um modo: -Plan, -Build, -RecoverJob ou -CleanupJob. -InspectMedia acompanha -Plan.'
 }
-if ($recovery) {
-    if ($IsoPath -or $OutputPath -or $ImageIndex -or $WindowsEdition -or $TestOnly -or $ExpectedSha256) {
-        throw '-RecoverJob aceita o ID do job e a área de trabalho, sem opções de mídia.'
+if ($recovery -or $cleanup) {
+    $jobOptions = @('WorkRoot', 'WhatIf', 'Confirm', 'Verbose', 'Debug', 'ErrorAction', 'WarningAction',
+        'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable')
+    if ($PSBoundParameters.Keys | Where-Object { $_ -notin $jobOptions -and $_ -notin @('RecoverJob', 'CleanupJob') }) {
+        throw '-RecoverJob e -CleanupJob aceitam o ID do job e a área de trabalho, sem opções de mídia.'
     }
     Import-Module (Join-Path $PSScriptRoot 'modules/BigZ.Media.psm1') -ErrorAction Stop
-    if ($PSCmdlet.ShouldProcess($RecoverJob.ToString('N'), 'Recuperar um job local')) {
+    if ($cleanup) {
+        $cleanupArgs = @{ WorkRoot = $WorkRoot; Id = $CleanupJob }
+        foreach ($option in @('WhatIf', 'Confirm')) {
+            if ($PSBoundParameters.ContainsKey($option)) { $cleanupArgs[$option] = $PSBoundParameters[$option] }
+        }
+        Clear-BigZMediaJob @cleanupArgs
+    }
+    elseif ($PSCmdlet.ShouldProcess($RecoverJob.ToString('N'), 'Recuperar um job local')) {
         Restore-BigZMediaJob -WorkRoot $WorkRoot -Id $RecoverJob -Confirm:$false
     }
     return

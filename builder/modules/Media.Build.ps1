@@ -281,7 +281,7 @@ function Invoke-BigZMediaBuild {
 
         try {
             Save-BigZJobState $job 'complete'
-            Clear-BigZJobPayload $job
+            Clear-BigZJobPayload @(Get-BigZJobPayloadPath $job)
         }
         catch { Write-Warning "Área de trabalho preservada em '$($job.Path)': $($_.Exception.Message)" }
         return $result
@@ -300,9 +300,57 @@ function Restore-BigZMediaJob {
     $mutex = Enter-BigZMediaLock
     try {
         $job = Read-BigZJob $root $Id
-        Close-BigZJobResource $job $tools
-        Save-BigZJobState $job 'recovered'
+        if ($job.Record.Stage -cne 'cleaned') {
+            Close-BigZJobResource $job $tools
+            Save-BigZJobState $job 'recovered'
+        }
         return [pscustomobject]@{ Mode = 'recovery'; JobId = $job.Id; JobPath = $job.Path }
+    }
+    finally { Exit-BigZMediaLock $mutex }
+}
+
+function Clear-BigZMediaJob {
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    param([Parameter(Mandatory)][string]$WorkRoot, [Parameter(Mandatory)][guid]$Id)
+
+    $root = Get-BigZLabLocation $WorkRoot
+    $mutex = Enter-BigZMediaLock
+    try {
+        $job = Read-BigZJob $root $Id
+        $state = $job.Record
+        if ($state.AttachRequested -or $state.WimMountRequested -or $state.HiveLoadRequested) {
+            throw "O job '$($job.Id)' tem recursos pendentes. Use -RecoverJob primeiro."
+        }
+        if ($state.Stage -cnotin @('failed', 'recovered', 'cleaned')) {
+            throw "O job '$($job.Id)' está em '$($state.Stage)'. A limpeza aceita jobs falhos ou recuperados."
+        }
+
+        $paths = @(Get-BigZJobPayloadPath $job)
+        if ($state.Stage -ceq 'cleaned') {
+            if ($paths.Count) { throw 'Surgiram pastas em um job cuja limpeza já foi concluída. Preserve-as para revisão.' }
+            return [pscustomobject]@{ Mode = 'cleanup'; JobId = $job.Id; JobPath = $job.Path; RemovedPaths = @() }
+        }
+
+        $target = $job.Path
+        if ($paths.Count) { $target = $paths -join ', ' }
+        if (-not $PSCmdlet.ShouldProcess($target, 'Excluir arquivos de trabalho deste job e atualizar o diário')) { return }
+        Assert-BigZElevation
+        if ($paths.Count) {
+            $mounts = @(Get-BigZMountedImage $job -CleanupCheck | Where-Object {
+                (Test-BigZWithinPath $_.Path $job.Path) -or (Test-BigZWithinPath $_.ImagePath $job.Path)
+            })
+            if ($mounts.Count -or (Test-BigZOfflineHiveLoaded $job)) {
+                throw "O Windows ainda registra uma montagem ou hive do job '$($job.Id)'. Preserve os arquivos para diagnóstico."
+            }
+            $currentPaths = @(Get-BigZJobPayloadPath $job)
+            if (($paths -join '|') -cne ($currentPaths -join '|')) {
+                throw 'As pastas do job mudaram durante a conferência. Execute a prévia novamente.'
+            }
+            Clear-BigZJobPayload $currentPaths
+        }
+
+        Save-BigZJobState $job 'cleaned'
+        return [pscustomobject]@{ Mode = 'cleanup'; JobId = $job.Id; JobPath = $job.Path; RemovedPaths = $paths }
     }
     finally { Exit-BigZMediaLock $mutex }
 }

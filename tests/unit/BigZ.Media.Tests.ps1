@@ -213,6 +213,108 @@ InModuleScope BigZ.Media {
             Should -Invoke -CommandName Close-BigZWim -Times 1 -Exactly -Scope It -ParameterFilter { $Job.Id -eq $finished.Id -and -not $Save }
         }
 
+        Context 'limpeza explícita de jobs' {
+            BeforeAll {
+                function Get-TestCleanupFixture {
+                    param([string]$Stage = 'failed')
+                    $source = Get-TestSourceFixture (Join-Path $TestDrive 'cleanup-source.iso')
+                    $work = Join-Path $TestDrive 'work-cleanup'
+                    $job = Initialize-BigZJob $work $source.Path
+                    [IO.File]::WriteAllText((Join-Path $job.MediaPath 'payload.wim'), 'mídia temporária')
+                    [IO.File]::WriteAllText($job.DismLog, 'evidência')
+                    Save-BigZJobState $job $Stage
+                    return $job
+                }
+            }
+
+            BeforeEach {
+                Mock Assert-BigZElevation {}
+                Mock Get-BigZMountedImage {}
+                Mock Test-BigZOfflineHiveLoaded { $false }
+            }
+
+            It 'exclui só o payload de <Stage>, preserva a evidência e permite repetir o comando' -ForEach @(
+                @{ Stage = 'failed' }, @{ Stage = 'recovered' }
+            ) {
+                $job = Get-TestCleanupFixture $Stage
+                $work = Split-Path -Parent $job.Path
+                $outside = Join-Path $work 'resultado.iso'
+                [IO.File]::WriteAllText($outside, 'outro artefato')
+                $result = Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false
+                $result.RemovedPaths.Count | Should -Be 3
+                foreach ($directory in @($job.MediaPath, $job.MountPath, $job.ScratchDirectory)) {
+                    Test-Path -LiteralPath $directory | Should -BeFalse
+                }
+                (Read-BigZJob $work $job.Id).Record.Stage | Should -Be 'cleaned'
+                Get-Content -LiteralPath $job.DismLog -Encoding UTF8 | Should -Be 'evidência'
+                Test-Path -LiteralPath $outside | Should -BeTrue
+                Test-Path -LiteralPath $job.Record.SourcePath | Should -BeTrue
+                (Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false).RemovedPaths.Count | Should -Be 0
+            }
+
+            It 'faz prévia pela CLI sem tocar no diário, no payload ou nas montagens' {
+                $job = Get-TestCleanupFixture
+                $builderScript = Join-Path (Get-Module BigZ.Media).ModuleBase '../Build-BigZIso.ps1'
+                $work = Split-Path -Parent $job.Path
+                $journalHash = (Get-FileHash -LiteralPath $job.StatePath).Hash
+                & $builderScript -CleanupJob $job.Id -WorkRoot $work -WhatIf
+                Test-Path -LiteralPath (Join-Path $job.MediaPath 'payload.wim') | Should -BeTrue
+                (Get-FileHash -LiteralPath $job.StatePath).Hash | Should -Be $journalHash
+                Should -Invoke -CommandName Assert-BigZElevation -Times 0 -Exactly -Scope It
+                Should -Invoke -CommandName Get-BigZMountedImage -Times 0 -Exactly -Scope It
+            }
+
+            It 'preserva jobs em andamento, concluídos ou com recursos pendentes' {
+                $job = Get-TestCleanupFixture 'packaging'
+                $work = Split-Path -Parent $job.Path
+                { Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false } | Should -Throw '*packaging*'
+                Save-BigZJobState $job 'complete'
+                { Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false } | Should -Throw '*complete*'
+                foreach ($flag in @('AttachRequested', 'WimMountRequested', 'HiveLoadRequested')) {
+                    $job.Record.$flag = $true
+                    Save-BigZJobState $job 'failed'
+                    { Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false } | Should -Throw '*-RecoverJob*'
+                    $job.Record.$flag = $false
+                }
+                Test-Path -LiteralPath $job.MediaPath | Should -BeTrue
+                Should -Invoke -CommandName Get-BigZMountedImage -Times 0 -Exactly -Scope It
+            }
+
+            It 'detecta WIM do job montado fora de sua pasta mesmo com o diário liberado' {
+                $job = Get-TestCleanupFixture
+                $work = Split-Path -Parent $job.Path
+                Mock Get-BigZMountedImage { [pscustomobject]@{ Path = 'C:\another-mount'; ImagePath = $Job.WimPath } }
+                { Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false } | Should -Throw '*Windows ainda registra*'
+                Test-Path -LiteralPath $job.MediaPath | Should -BeTrue
+                (Read-BigZJob $work $job.Id).Record.Stage | Should -Be 'failed'
+            }
+
+            It 'preserva o payload quando a hive do job ainda está carregada' {
+                $job = Get-TestCleanupFixture
+                $work = Split-Path -Parent $job.Path
+                Mock Test-BigZOfflineHiveLoaded { $true }
+                { Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false } | Should -Throw '*Windows ainda registra*'
+                Test-Path -LiteralPath $job.MediaPath | Should -BeTrue
+            }
+
+            It 'recusa uma junção aninhada antes de excluir qualquer diretório' {
+                $job = Get-TestCleanupFixture
+                $work = Split-Path -Parent $job.Path
+                $outside = Join-Path $TestDrive 'outside-cleanup'
+                [void][IO.Directory]::CreateDirectory($outside)
+                $sentinel = Join-Path $outside 'preservado.txt'
+                [IO.File]::WriteAllText($sentinel, 'preservado')
+                $link = Join-Path $job.ScratchDirectory 'junction'
+                $null = New-Item -Path $link -ItemType Junction -Target $outside -ErrorAction Stop
+                try {
+                    { Clear-BigZMediaJob -WorkRoot $work -Id $job.Id -Confirm:$false } | Should -Throw '*Link ou ponto de montagem*'
+                    Test-Path -LiteralPath $sentinel | Should -BeTrue
+                    Test-Path -LiteralPath $job.MediaPath | Should -BeTrue
+                }
+                finally { [IO.Directory]::Delete($link) }
+            }
+        }
+
         It 'recusa consultar como própria uma montagem que aponta para outro WIM' {
             $work = Join-Path $TestDrive 'work-foreign'
             $source = Get-TestSourceFixture (Join-Path $TestDrive 'simulated-foreign.iso')
