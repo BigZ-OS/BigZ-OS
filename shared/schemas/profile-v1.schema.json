@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Perfil de planejamento BigZ v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "base",
+    "offlineTweaks",
+    "optionalTweaks"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "enum": [
+        "base",
+        "dev",
+        "balanced",
+        "full-performance"
+      ]
+    },
+    "base": {
+      "enum": [
+        null,
+        "base",
+        "dev",
+        "balanced",
+        "full-performance"
+      ]
+    },
+    "offlineTweaks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+      }
+    },
+    "optionalTweaks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+      }
+    }
+  },
+  "if": {
+    "properties": {
+      "id": {
+        "const": "base"
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "base": {
+        "type": "null"
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "base": {
+        "type": "string"
+      }
+    }
+  }
+}

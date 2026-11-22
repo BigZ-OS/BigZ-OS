@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "full-performance",
+  "base": "base",
+  "offlineTweaks": [],
+  "optionalTweaks": [
+    "appearance.disable-transparency"
+  ]
+}

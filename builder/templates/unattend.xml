@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reserva para a fase de build. Validar no Windows SIM antes de gerar mídia. -->
+<unattend xmlns="urn:schemas-microsoft-com:unattend" />

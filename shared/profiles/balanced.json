@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "balanced",
+  "base": "base",
+  "offlineTweaks": [],
+  "optionalTweaks": [
+    "explorer.show-file-extensions"
+  ]
+}

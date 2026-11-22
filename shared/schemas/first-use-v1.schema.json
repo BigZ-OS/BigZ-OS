@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Perfis de primeiro uso BigZ v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profiles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "firstUseDefaults",
+          "firstUseAppDefaults"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "dev",
+              "balanced",
+              "full-performance"
+            ]
+          },
+          "firstUseDefaults": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+            }
+          },
+          "firstUseAppDefaults": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

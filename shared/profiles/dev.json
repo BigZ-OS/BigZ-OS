@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "dev",
+  "base": "base",
+  "offlineTweaks": [],
+  "optionalTweaks": [
+    "explorer.show-file-extensions",
+    "explorer.open-this-pc"
+  ]
+}
