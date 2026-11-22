@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "explorer.show-file-extensions",
+  "description": "Mostrar extensões de arquivo conhecidas no Explorer",
+  "risk": "low",
+  "editions": [
+    "dev",
+    "balanced"
+  ],
+  "phase": "online",
+  "scope": "currentUser",
+  "requires": {
+    "builds": [
+      26200
+    ],
+    "architectures": [
+      "x64"
+    ],
+    "admin": false
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "action": {
+    "type": "registry.setValue",
+    "key": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "HideFileExt",
+    "valueType": "DWord",
+    "value": 0
+  },
+  "verify": {
+    "type": "registry.matchesAction"
+  },
+  "rollback": {
+    "type": "restoreSnapshot"
+  },
+  "restart": "none",
+  "securityImpact": "none",
+  "source": "https://learn.microsoft.com/en-us/windows/advanced-settings"
+}

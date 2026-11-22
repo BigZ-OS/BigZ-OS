@@ -1,0 +1,131 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BigZ OS Toolbox" Width="1110" Height="710" MinWidth="880" MinHeight="560"
+        WindowStartupLocation="CenterScreen" Background="#101827" Foreground="#F1F5F9"
+        FontFamily="Segoe UI" UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <Window.Resources>
+    <SolidColorBrush x:Key="Panel" Color="#172235"/>
+    <SolidColorBrush x:Key="Border" Color="#354760"/>
+    <SolidColorBrush x:Key="Muted" Color="#B4C3D6"/>
+    <Style TargetType="Button">
+      <Setter Property="Padding" Value="15,8"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Background" Value="#E2E8F0"/>
+      <Setter Property="Foreground" Value="#0F172A"/>
+    </Style>
+    <Style TargetType="RadioButton">
+      <Setter Property="Margin" Value="0,0,12,0"/>
+      <Setter Property="Padding" Value="5,0,0,0"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style TargetType="ListBoxItem">
+      <Setter Property="Padding" Value="10,8"/>
+    </Style>
+    <Style TargetType="DataGridColumnHeader">
+      <Setter Property="Background" Value="#24344C"/>
+      <Setter Property="Foreground" Value="#F1F5F9"/>
+      <Setter Property="Padding" Value="8,6"/>
+    </Style>
+  </Window.Resources>
+  <Grid Margin="21">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="172"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <DockPanel Grid.ColumnSpan="2" Margin="0,0,0,19" LastChildFill="True">
+      <Border DockPanel.Dock="Right" Padding="10,5" Background="#163542" CornerRadius="5"
+              VerticalAlignment="Center">
+        <TextBlock Text="Modo de simulação" Foreground="#A5F3FC" FontWeight="SemiBold"/>
+      </Border>
+      <TextBlock Text="BigZ OS Toolbox" FontSize="27" FontWeight="Bold"/>
+    </DockPanel>
+
+    <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource Panel}"
+            BorderBrush="{StaticResource Border}" BorderThickness="1" Margin="0,0,0,16"
+            Padding="14,11" CornerRadius="6">
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Margin="0,0,16,0" Text="Edição" VerticalAlignment="Center" Foreground="{StaticResource Muted}"/>
+        <RadioButton x:Name="DevRadio" GroupName="Edition" Content="DEV" Tag="dev" Foreground="#76E9C5"/>
+        <RadioButton x:Name="BalancedRadio" GroupName="Edition" Content="Balanced" Tag="balanced" Foreground="#A7D2FF"/>
+        <RadioButton x:Name="FullRadio" GroupName="Edition" Content="Full Performance" Tag="full-performance" Foreground="#FFB7BE"/>
+      </StackPanel>
+    </Border>
+
+    <ListBox Grid.Row="2" x:Name="Navigation" Margin="0,0,14,0" Padding="3"
+             AutomationProperties.Name="Seções" Background="{StaticResource Panel}" Foreground="#F1F5F9"
+             BorderBrush="{StaticResource Border}">
+      <ListBoxItem Content="Apps e navegadores" Tag="app"/>
+      <ListBoxItem Content="Ajustes do sistema" Tag="tweak"/>
+      <ListBoxItem Content="Presets visuais" Tag="preset"/>
+    </ListBox>
+
+    <Grid Grid.Row="2" Grid.Column="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="3*" MinWidth="320"/>
+        <ColumnDefinition Width="12"/>
+        <ColumnDefinition Width="2*" MinWidth="225"/>
+      </Grid.ColumnDefinitions>
+      <DataGrid x:Name="CatalogGrid" AutomationProperties.Name="Itens da seção"
+                AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                CanUserReorderColumns="False" CanUserResizeRows="False" HeadersVisibility="Column"
+                EnableRowVirtualization="True" GridLinesVisibility="None"
+                Background="{StaticResource Panel}" BorderBrush="{StaticResource Border}"
+                RowBackground="#172235" AlternatingRowBackground="#1C2A40" Foreground="#F1F5F9">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Header="Incluir" Width="62">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox IsChecked="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          AutomationProperties.Name="{Binding Name}" HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn Header="Item" Binding="{Binding Name}" Width="*" IsReadOnly="True">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="5,5,5,5"/>
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTextColumn Header="Risco" Binding="{Binding Risk}" Width="82" IsReadOnly="True">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{Binding RiskBrush}"/>
+                <Setter Property="Margin" Value="5,5,5,5"/>
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+      <Border Grid.Column="2" Background="{StaticResource Panel}" BorderBrush="{StaticResource Border}"
+              BorderThickness="1" Padding="11">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top" Text="Plano da Toolbox" FontSize="16" FontWeight="SemiBold"
+                     Margin="0,0,0,8"/>
+          <TextBox x:Name="PlanText" AutomationProperties.Name="Resultado da simulação" IsReadOnly="True"
+                   TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" BorderThickness="0"
+                   Background="{StaticResource Panel}" Foreground="#E2E8F0" Padding="3"
+                   Text="Marque os itens e selecione Ver plano."/>
+        </DockPanel>
+      </Border>
+    </Grid>
+
+    <DockPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,15,0,0" LastChildFill="False">
+      <Button DockPanel.Dock="Right" x:Name="PlanButton" Content="Ver plano" IsDefault="True" Background="#83DDFA"/>
+      <Button DockPanel.Dock="Right" x:Name="UndoButton" Content="Desfazer" IsEnabled="False" Margin="0,0,9,0"
+              ToolTip="Exibe a reversão simulada do último plano"/>
+      <TextBlock DockPanel.Dock="Left" Text="Para Windows 11. Projeto independente."
+                 Foreground="{StaticResource Muted}" VerticalAlignment="Center"/>
+    </DockPanel>
+  </Grid>
+</Window>

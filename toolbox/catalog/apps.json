@@ -1,0 +1,2904 @@
+{
+  "schemaVersion": 1,
+  "apps": [
+    {
+      "schemaVersion": 1,
+      "id": "google-chrome",
+      "name": "Chrome",
+      "category": "browser",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.google.com/chrome/terms/"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Google.Chrome",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/Google/Chrome/158.0.8127.37",
+        "officialUrl": "https://www.google.com/chrome/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://dl.google.com/dl/chrome/install/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Chrome via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "mozilla-firefox",
+      "name": "Firefox",
+      "category": "browser",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://www.mozilla.org/MPL/2.0"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Mozilla.Firefox",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Mozilla/Firefox/160.0.1",
+        "officialUrl": "https://www.mozilla.org/firefox/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download-installer.cdn.mozilla.net/pub/firefox/releases/160.0.1/win64/en-US/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Firefox via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "brave-brave",
+      "name": "Brave",
+      "category": "browser",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/brave/brave-browser/blob/master/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Brave.Brave",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/b/Brave/Brave/158.1.100.58",
+        "officialUrl": "https://brave.com/download",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://github.com/brave/brave-browser/releases/download/v1.100.58/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Brave via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "microsoft-edge",
+      "name": "Microsoft Edge",
+      "category": "browser",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.microsoft.com/en-us/servicesagreement"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.Edge",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/Edge/156.0.4314.58",
+        "officialUrl": "https://www.microsoft.com/en-us/edge",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download.microsoft.com/download/6a05dff7-d4e0-4e1f-a773-efe3f9c17341/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Microsoft Edge via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "vivaldi-vivaldi",
+      "name": "Vivaldi",
+      "category": "browser",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://vivaldi.com/privacy/vivaldi-end-user-license-agreement/"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Vivaldi.Vivaldi",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/v/Vivaldi/Vivaldi/8.3.4191.47",
+        "officialUrl": "https://vivaldi.com/desktop/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://downloads.vivaldi.com/stable/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Vivaldi via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "opera-opera",
+      "name": "Opera",
+      "category": "browser",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://legal.opera.com/eula/computers/"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Opera.Opera",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/o/Opera/Opera/140.0.6074.36",
+        "officialUrl": "https://www.opera.com/browsers/opera",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://get.geo.opera.com/pub/opera/desktop/140.0.6074.36/win/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Opera via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "bitdefender-bitdefender",
+      "name": "Bitdefender Antivirus Free (via Bitdefender Agent)",
+      "category": "security",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.bitdefender.com/site/view/legal-eula.html"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+        "wingetEvidence": {
+          "packageId": "Bitdefender.Bitdefender",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/b/Bitdefender/Bitdefender/26.0.1.233"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Bitdefender Antivirus Free (via Bitdefender Agent) pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "malwarebytes-malwarebytes",
+      "name": "Malwarebytes",
+      "category": "security",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freemium",
+        "name": "Grátis para análise sob demanda / pago para proteção em tempo real",
+        "url": "https://www.malwarebytes.com/eula"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Malwarebytes.Malwarebytes",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Malwarebytes/Malwarebytes/5.7.3.376",
+        "officialUrl": "https://www.malwarebytes.com/mwb-download",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://data-cdn.mbamupdates.com/web/mb5-setup-consumer/offline/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Malwarebytes via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "eset-nod32",
+      "name": "ESET NOD32 Antivirus",
+      "category": "security",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "paid",
+        "name": "Pago",
+        "url": "https://help.eset.com/eav/19/en-US/eula.html"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "ESET.Nod32",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/e/ESET/Nod32/19.2.10.0",
+        "officialUrl": "https://www.eset.com/us/home/antivirus/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download.eset.com/com/eset/apps/home/eav/windows/v19/19.2.10.0/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "ESET NOD32 Antivirus via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "bitwarden-bitwarden",
+      "name": "Bitwarden",
+      "category": "security",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freemium",
+        "name": "Open source / planos pagos opcionais",
+        "url": "https://github.com/bitwarden/clients/blob/HEAD/LICENSE.txt"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Bitwarden.Bitwarden",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/b/Bitwarden/Bitwarden/2026.11.0",
+        "officialUrl": "https://bitwarden.com/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://github.com/bitwarden/clients/releases/download/desktop-v2026.11.0/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Bitwarden via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "vscode",
+      "name": "Visual Studio Code",
+      "category": "dev.ide",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis (binário Microsoft)",
+        "url": "https://code.visualstudio.com/license"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.VisualStudioCode",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/VisualStudioCode/1.146.0",
+        "officialUrl": "https://code.visualstudio.com/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://vscode.download.prss.microsoft.com/dbazure/download/stable/69047191fc427f2f92828279aae1d90d8eeda7ab/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Visual Studio Code via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "microsoft-visualstudio-community",
+      "name": "Visual Studio Community",
+      "category": "dev.ide",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "conditional",
+        "name": "Grátis conforme elegibilidade",
+        "url": "https://visualstudio.microsoft.com/license-terms/"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.VisualStudio.Community",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/VisualStudio/Community/18.12.1",
+        "officialUrl": "https://visualstudio.microsoft.com/vs/community/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download.visualstudio.microsoft.com/download/pr/646c5a89-4d3a-4f43-985e-9c4c6771f304/48af1f0704786424d477bf1025ec8dcd5cd1015f23ddfdef67e2ede7e03d82f6/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Visual Studio Community via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "jetbrains-intellijidea",
+      "name": "IntelliJ IDEA",
+      "category": "dev.ide",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freemium",
+        "name": "Grátis no núcleo / pago para recursos Ultimate",
+        "url": "https://www.jetbrains.com/legal/docs/toolbox/user/"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "JetBrains.IntelliJIDEA",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/j/JetBrains/IntelliJIDEA/2026.3",
+        "officialUrl": "https://www.jetbrains.com/help/idea/intellij-idea-single-distribution.html",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://download.jetbrains.com/idea/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "IntelliJ IDEA via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "google-androidstudio",
+      "name": "Android Studio",
+      "category": "dev.ide",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://developer.android.com/studio/terms"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Google.AndroidStudio",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/Google/AndroidStudio/2026.2.2.9",
+        "officialUrl": "https://developer.android.com/studio",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://edgedl.me.gvt1.com/android/studio/install/2026.2.2.9/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Android Studio via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "openjs-nodejs-lts",
+      "name": "Node.js LTS",
+      "category": "dev.runtime",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/nodejs/node/blob/v26.13.1/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "OpenJS.NodeJS.LTS",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/o/OpenJS/NodeJS/LTS/26.13.1",
+        "officialUrl": "https://nodejs.org/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://nodejs.org/dist/v26.13.1/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Node.js LTS via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "python-python-3-14",
+      "name": "Python 3.14",
+      "category": "dev.runtime",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://docs.python.org/3/license.html"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Python.Python.3.14",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/p/Python/Python/3/14/3.14.10",
+        "officialUrl": "https://www.python.org/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://www.python.org/ftp/python/3.14.10/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Python 3.14 via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "microsoft-dotnet-sdk-10",
+      "name": ".NET SDK 10",
+      "category": "dev.runtime",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://dotnet.microsoft.com"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.DotNet.SDK.10",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/DotNet/SDK/10/10.0.404",
+        "officialUrl": "https://dotnet.microsoft.com",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download.microsoft.com/download/a45387e5-e2f1-4ab3-808f-96d2e6f109cc/638cfd74-d0f4-4385-a792-030dac790081/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": ".NET SDK 10 via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "eclipseadoptium-temurin-21-jdk",
+      "name": "Eclipse Temurin JDK 21",
+      "category": "dev.runtime",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/adoptium/jdk/blob/HEAD/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "EclipseAdoptium.Temurin.21.JDK",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/e/EclipseAdoptium/Temurin/21/JDK/21.0.13.102",
+        "officialUrl": "https://adoptium.net/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1+2/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Eclipse Temurin JDK 21 via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "microsoft-vcredist-2015-x64",
+      "name": "Microsoft Visual C++ Redistributable v14 x64",
+      "category": "dev.runtime",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.microsoft.com/legal/terms-of-use"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.VCRedist.2015+.x64",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/VCRedist/2015%2B/x64/14.52.37029.0",
+        "officialUrl": "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download.visualstudio.microsoft.com/download/pr/78d061c5-9ef3-42ab-98ed-3309d1095dc4/9C02C9ED120F671B900E6B9471D890E3B2414117A7E53F4AE2E855466FA2B7C9/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Microsoft Visual C++ Redistributable v14 x64 via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "git",
+      "name": "Git for Windows",
+      "category": "dev.git",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/git-for-windows/build-extra/blob/HEAD/LICENSE.txt"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Git.Git",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/Git/Git/2.56.1",
+        "officialUrl": "https://gitforwindows.org/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Git for Windows via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "github-cli",
+      "name": "GitHub CLI",
+      "category": "dev.git",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/cli/cli/blob/HEAD/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "GitHub.cli",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/GitHub/cli/2.105.0",
+        "officialUrl": "https://cli.github.com/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/cli/cli/releases/download/v2.105.0/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "GitHub CLI via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "docker-dockerdesktop",
+      "name": "Docker Desktop",
+      "category": "dev.containers",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "conditional",
+        "name": "Grátis conforme elegibilidade / assinatura em outros casos",
+        "url": "https://www.docker.com/legal/docker-subscription-service-agreement"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Docker.DockerDesktop",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/d/Docker/DockerDesktop/4.100.0",
+        "officialUrl": "https://www.docker.com/products/docker-desktop/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://desktop.docker.com/win/main/amd64/246961/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Docker Desktop via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "wsl",
+      "name": "WSL",
+      "category": "dev.containers",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/microsoft/WSL/blob/master/LICENSE"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://learn.microsoft.com/windows/wsl/",
+        "wingetEvidence": {
+          "packageId": "Microsoft.WSL",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/WSL/3.0.5"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "WSL pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "canonical-ubuntu-2404",
+      "name": "Ubuntu 24.04 LTS para WSL",
+      "category": "dev.containers",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source / componentes com licenças variadas",
+        "url": "https://ubuntu.com/legal/terms-and-policies"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://ubuntu.com/desktop/wsl",
+        "wingetEvidence": {
+          "packageId": "Canonical.Ubuntu.2404",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/c/Canonical/Ubuntu/2404/2404.0.5.0"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [
+        "wsl"
+      ],
+      "conflictsWith": [],
+      "description": "Ubuntu 24.04 LTS para WSL pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "windows-terminal",
+      "name": "Windows Terminal",
+      "category": "dev.terminal",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/microsoft/terminal/blob/main/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.WindowsTerminal",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/WindowsTerminal/1.25.3131.0",
+        "officialUrl": "https://docs.microsoft.com/windows/terminal",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://github.com/microsoft/terminal/releases/download/v1.25.3131.0/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Windows Terminal via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "microsoft-powershell",
+      "name": "PowerShell 7",
+      "category": "dev.terminal",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://microsoft.com/PowerShell",
+        "wingetEvidence": {
+          "packageId": "Microsoft.PowerShell",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/PowerShell/7.7.0.0"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "PowerShell 7 pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "wez-wezterm",
+      "name": "WezTerm",
+      "category": "dev.terminal",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/wez/wezterm/blob/main/LICENSE.md"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://wezterm.org",
+        "wingetEvidence": {
+          "packageId": "wez.wezterm",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/w/wez/wezterm/20240203-110809-5046fc22"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "WezTerm pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "postgresql-postgresql-18",
+      "name": "PostgreSQL 18",
+      "category": "dev.database",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://www.postgresql.org/about/licence"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "PostgreSQL.PostgreSQL.18",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/p/PostgreSQL/PostgreSQL/18/18.7-2",
+        "officialUrl": "https://www.postgresql.org/download/windows/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://get.enterprisedb.com/postgresql/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "PostgreSQL 18 via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "sqlite-sqlite",
+      "name": "SQLite CLI",
+      "category": "dev.database",
+      "editions": [
+        "dev"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "public-domain",
+        "name": "Domínio público",
+        "url": "https://sqlite.org/"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://sqlite.org/",
+        "wingetEvidence": {
+          "packageId": "SQLite.SQLite",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/s/SQLite/SQLite/3.54.1"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "SQLite CLI pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dbeaver-dbeaver-community",
+      "name": "DBeaver Community",
+      "category": "dev.database",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/dbeaver/dbeaver/blob/HEAD/LICENSE.md"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "DBeaver.DBeaver.Community",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/d/DBeaver/DBeaver/Community/26.2.5",
+        "officialUrl": "https://dbeaver.io/download/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://github.com/dbeaver/dbeaver/releases/download/26.2.5/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "DBeaver Community via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dbbrowserforsqlite-dbbrowserforsqlite",
+      "name": "DB Browser for SQLite",
+      "category": "dev.database",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/sqlitebrowser/sqlitebrowser/blob/master/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "DBBrowserForSQLite.DBBrowserForSQLite",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/d/DBBrowserForSQLite/DBBrowserForSQLite/3.13.1",
+        "officialUrl": "https://sqlitebrowser.org/dl/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.13.1/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "DB Browser for SQLite via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "7zip-7zip",
+      "name": "7-Zip",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source, com restrições do unRAR",
+        "url": "https://7-zip.org/license.txt"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "7zip.7zip",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/7/7zip/7zip/26.06",
+        "officialUrl": "https://7-zip.org/download.html",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/ip7z/7zip/releases/download/26.06/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "7-Zip via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "microsoft-powertoys",
+      "name": "Microsoft PowerToys",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/microsoft/PowerToys/blob/HEAD/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "Microsoft.PowerToys",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/m/Microsoft/PowerToys/0.102.3101",
+        "officialUrl": "https://github.com/microsoft/PowerToys",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Microsoft PowerToys via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "voidtools-everything",
+      "name": "Everything",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.voidtools.com/License.txt"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "voidtools.Everything",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/v/voidtools/Everything/1.4.1.1032",
+        "officialUrl": "https://www.voidtools.com/faq/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://www.voidtools.com/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Everything via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "rufus-rufus",
+      "name": "Rufus",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/pbatard/rufus/blob/HEAD/LICENSE.txt"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://rufus.ie/",
+        "wingetEvidence": {
+          "packageId": "Rufus.Rufus",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/r/Rufus/Rufus/4.16"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Rufus pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "crystaldewworld-crystaldiskinfo",
+      "name": "CrystalDiskInfo",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://crystalmark.info/en/software/crystaldiskinfo/crystaldiskinfo-license/"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://crystalmark.info/en/software/crystaldiskinfo/",
+        "wingetEvidence": {
+          "packageId": "CrystalDewWorld.CrystalDiskInfo",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/c/CrystalDewWorld/CrystalDiskInfo/9.9.5"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "CrystalDiskInfo pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "realix-hwinfo",
+      "name": "HWiNFO",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "conditional",
+        "name": "Grátis para uso não comercial / pago para uso comercial",
+        "url": "https://www.hwinfo.com/files/license.pdf"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.hwinfo.com/download/",
+        "wingetEvidence": {
+          "packageId": "REALiX.HWiNFO",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/r/REALiX/HWiNFO/8.60"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "HWiNFO pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "sumatrapdf-sumatrapdf",
+      "name": "SumatraPDF",
+      "category": "utilities",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/sumatrapdfreader/sumatrapdf/blob/3.6rel/COPYING"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "SumatraPDF.SumatraPDF",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/s/SumatraPDF/SumatraPDF/3.6.1",
+        "officialUrl": "https://github.com/sumatrapdfreader/sumatrapdf",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://www.sumatrapdfreader.org/dl/rel/3.6.1/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "SumatraPDF via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "videolan-vlc",
+      "name": "VLC",
+      "category": "media",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://code.videolan.org/videolan/vlc/-/blob/HEAD/COPYING"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "VideoLAN.VLC",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/v/VideoLAN/VLC/3.0.24",
+        "officialUrl": "https://www.videolan.org/vlc/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://download.videolan.org/pub/videolan/vlc/3.0.24/win64/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "VLC via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "obsproject-obsstudio",
+      "name": "OBS Studio",
+      "category": "media",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/obsproject/obs-studio/blob/HEAD/COPYING"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "OBSProject.OBSStudio",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/o/OBSProject/OBSStudio/33.0.1",
+        "officialUrl": "https://obsproject.com/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/obsproject/obs-studio/releases/download/33.0.1/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "OBS Studio via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "audacity-audacity",
+      "name": "Audacity",
+      "category": "media",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/audacity/audacity/blob/HEAD/LICENSE.txt"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.audacityteam.org/",
+        "wingetEvidence": {
+          "packageId": "Audacity.Audacity",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/a/Audacity/Audacity/4.0.2.263060742"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Audacity pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "handbrake-handbrake",
+      "name": "HandBrake",
+      "category": "media",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/HandBrake/HandBrake/blob/HEAD/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "HandBrake.HandBrake",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/h/HandBrake/HandBrake/1.11.2",
+        "officialUrl": "https://handbrake.fr/",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/HandBrake/HandBrake/releases/download/1.11.2/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "HandBrake via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gimp-gimp-3",
+      "name": "GIMP",
+      "category": "media",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://www.gimp.org/about/COPYING"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "GIMP.GIMP.3",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/GIMP/GIMP/3/3.2.8.0",
+        "officialUrl": "https://www.gimp.org/downloads/",
+        "scope": "user",
+        "allowedInstallerUrls": [
+          "https://download.gimp.org/gimp/v3.2/windows/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "GIMP via WinGet.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "valve-steam",
+      "name": "Steam",
+      "category": "games.launcher",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freemium",
+        "name": "Grátis, com jogos pagos",
+        "url": "https://store.steampowered.com/subscriber_agreement/"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://store.steampowered.com/about/",
+        "wingetEvidence": {
+          "packageId": "Valve.Steam",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/v/Valve/Steam/2.10.91.91"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Steam pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "epicgames-epicgameslauncher",
+      "name": "Epic Games Launcher",
+      "category": "games.launcher",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freemium",
+        "name": "Grátis, com jogos pagos",
+        "url": "https://epicgames.com/eula"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "EpicGames.EpicGamesLauncher",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/e/EpicGames/EpicGamesLauncher/1.3.210.0",
+        "officialUrl": "https://epicgames.com/download",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://epicgames-download1.akamaized.net/Builds/UnrealEngineLauncher/Installers/Windows/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Epic Games Launcher via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gog-galaxy",
+      "name": "GOG GALAXY",
+      "category": "games.launcher",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freemium",
+        "name": "Grátis, com jogos pagos",
+        "url": "https://www.gog.com/galaxy"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.gog.com/galaxy",
+        "wingetEvidence": {
+          "packageId": "GOG.Galaxy",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/GOG/Galaxy/2.1.10.56"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "GOG GALAXY pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "playnite-playnite",
+      "name": "Playnite",
+      "category": "games.launcher",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/JosefNemec/Playnite/blob/HEAD/LICENSE.md"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://playnite.link/",
+        "wingetEvidence": {
+          "packageId": "Playnite.Playnite",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/p/Playnite/Playnite/10.63"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Playnite pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "intel-inteldriverandsupportassistant",
+      "name": "Intel Driver & Support Assistant",
+      "category": "games.driver",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.intel.com/content/www/us/en/support/detect.html"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.intel.com/content/www/us/en/support/detect.html",
+        "wingetEvidence": {
+          "packageId": "Intel.IntelDriverAndSupportAssistant",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/i/Intel/IntelDriverAndSupportAssistant/26.2.0.7"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Intel Driver & Support Assistant pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "guru3d-afterburner",
+      "name": "MSI Afterburner",
+      "category": "games.overlay",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.msi.com/Landing/afterburner/graphics-cards"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.msi.com/Landing/afterburner/graphics-cards",
+        "wingetEvidence": {
+          "packageId": "Guru3D.Afterburner",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/Guru3D/Afterburner/4.6.6"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "MSI Afterburner pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "guru3d-rtss",
+      "name": "RivaTuner Statistics Server",
+      "category": "games.overlay",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "freeware",
+        "name": "Grátis",
+        "url": "https://www.guru3d.com/download/rtss-rivatuner-statistics-server-download/"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.guru3d.com/download/rtss-rivatuner-statistics-server-download/",
+        "wingetEvidence": {
+          "packageId": "Guru3D.RTSS",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/g/Guru3D/RTSS/7.3.7"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "RivaTuner Statistics Server pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "cxworld-capframex",
+      "name": "CapFrameX",
+      "category": "games.overlay",
+      "editions": [
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/CXWorld/CapFrameX/blob/HEAD/LICENSE"
+      },
+      "delivery": {
+        "provider": "winget",
+        "source": "winget",
+        "packageId": "CXWorld.CapFrameX",
+        "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/c/CXWorld/CapFrameX/1.9.2.4",
+        "officialUrl": "https://github.com/CXWorld/CapFrameX",
+        "scope": "machine",
+        "allowedInstallerUrls": [
+          "https://github.com/CXWorld/CapFrameX/releases/download/v1.9.2/"
+        ]
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": true
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "CapFrameX via WinGet.",
+      "phase": "online",
+      "scope": "machine",
+      "securityImpact": "none",
+      "action": {
+        "type": "winget.install"
+      },
+      "verify": {
+        "type": "winget.detectPackage"
+      },
+      "rollback": {
+        "type": "winget.uninstallIfNew"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ramensoftware-windhawk",
+      "name": "Windhawk",
+      "category": "appearance",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/ramensoftware/windhawk/blob/main/LICENSE"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://windhawk.net/",
+        "wingetEvidence": {
+          "packageId": "RamenSoftware.Windhawk",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/r/RamenSoftware/Windhawk/1.7.3"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Windhawk pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "open-shell",
+      "name": "Open-Shell",
+      "category": "appearance",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/Open-Shell/Open-Shell-Menu/blob/master/LICENSE"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://open-shell.github.io/Open-Shell-Menu/",
+        "wingetEvidence": {
+          "packageId": "Open-Shell.Open-Shell-Menu",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/o/Open-Shell/Open-Shell-Menu/4.4.198"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Open-Shell pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "translucenttb",
+      "name": "TranslucentTB",
+      "category": "appearance",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/TranslucentTB/TranslucentTB/blob/HEAD/LICENSE.md"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://github.com/TranslucentTB/TranslucentTB",
+        "wingetEvidence": {
+          "packageId": "CharlesMilette.TranslucentTB",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/c/CharlesMilette/TranslucentTB/2026.2.0.0"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "TranslucentTB pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "rainmeter-rainmeter",
+      "name": "Rainmeter",
+      "category": "appearance",
+      "editions": [
+        "dev",
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://github.com/rainmeter/rainmeter/blob/HEAD/LICENSE"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.rainmeter.net/",
+        "wingetEvidence": {
+          "packageId": "Rainmeter.Rainmeter",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/r/Rainmeter/Rainmeter/4.5.28.3936"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Rainmeter pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "startisback-startallback",
+      "name": "StartAllBack",
+      "category": "appearance",
+      "editions": [
+        "balanced"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "paid",
+        "name": "Pago, com avaliação",
+        "url": "https://www.startisback.com/license.txt"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://www.startallback.com/",
+        "wingetEvidence": {
+          "packageId": "StartIsBack.StartAllBack",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/s/StartIsBack/StartAllBack/3.9.28"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "StartAllBack pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "nilesoft-shell",
+      "name": "Nilesoft Shell",
+      "category": "appearance",
+      "editions": [
+        "dev",
+        "balanced",
+        "full-performance"
+      ],
+      "risk": "medium",
+      "license": {
+        "kind": "open-source",
+        "name": "Open source",
+        "url": "https://raw.githubusercontent.com/moudey/shell/main/LICENSE"
+      },
+      "delivery": {
+        "provider": "official-link",
+        "officialUrl": "https://nilesoft.org/download",
+        "wingetEvidence": {
+          "packageId": "Nilesoft.Shell",
+          "manifestUrl": "https://github.com/microsoft/winget-pkgs/tree/0a094c1dc5d5a3e795cbf935e8c75199f7be0d96/manifests/n/Nilesoft/Shell/1.9.18"
+        }
+      },
+      "requires": {
+        "builds": [
+          26200
+        ],
+        "architectures": [
+          "x64"
+        ],
+        "admin": false
+      },
+      "dependsOn": [],
+      "conflictsWith": [],
+      "description": "Nilesoft Shell pela página oficial.",
+      "phase": "online",
+      "scope": "currentUser",
+      "securityImpact": "none",
+      "action": {
+        "type": "officialLink.open"
+      },
+      "verify": {
+        "type": "none"
+      },
+      "rollback": {
+        "type": "none"
+      },
+      "restart": "none"
+    }
+  ]
+}

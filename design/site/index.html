@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BigZ OS — O seu sistema, com a sua identidade</title>
+  <style>
+    :root {
+      --bg-base: #0B0F19;
+      --bg-surface: #0F172A;
+      --bg-card: #1E293B;
+      --border-subtle: #334155;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --color-primary: #7C3AED;
+      --color-secondary: #2563EB;
+      --color-cyan: #06B6D4;
+      --color-dev: #10B981;
+      --color-perf: #F97316;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-gradient {
+      background: linear-gradient(135deg, #8B5CF6, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    .btn-github {
+      background: #1E293B;
+      color: #F8FAFC;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-github:hover {
+      background: #334155;
+      border-color: #64748B;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      color: #C4B5FD;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 3.25rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7C3AED, #2563EB);
+      color: #FFFFFF;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.5);
+    }
+
+    .btn-secondary {
+      background: #1E293B;
+      color: #F8FAFC;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+    }
+
+    /* Cards das 3 Edições */
+    .grid-editions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-dev { border-top: 4px solid var(--color-dev); }
+    .card-balanced { border-top: 4px solid var(--color-secondary); }
+    .card-perf { border-top: 4px solid var(--color-perf); }
+
+    .card-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .tag-dev { background: rgba(16, 185, 129, 0.2); color: #34D399; }
+    .tag-balanced { background: rgba(59, 130, 246, 0.2); color: #93C5FD; }
+    .tag-perf { background: rgba(249, 115, 22, 0.2); color: #FDBA74; }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-features {
+      list-style: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      color: #CBD5E1;
+    }
+
+    .card-features li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-features li::before {
+      content: "✓";
+      color: var(--color-cyan);
+      font-weight: bold;
+    }
+
+    /* Pilares / Diferenciais */
+    .grid-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-box h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Banner Toolbox */
+    .toolbox-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 3rem;
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .toolbox-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .toolbox-info h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .toolbox-info p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Rodapé & Isenção */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      background: #070A12;
+      padding: 3rem 2rem;
+      margin-top: 6rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .disclaimer {
+      font-size: 0.8rem;
+      color: #64748B;
+      line-height: 1.5;
+      max-width: 750px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-right: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+        <rect width="64" height="64" rx="14" fill="#1E293B" />
+        <path d="M 12 16 L 48 16 L 52 23 L 26 23 L 12 16 Z" fill="#8B5CF6" />
+        <polygon points="50,25 36,44 14,56 22,56 41,40 54,29" fill="#06B6D4" />
+        <path d="M 16 56 L 52 56 L 48 49 L 22 49 L 16 56 Z" fill="#8B5CF6" />
+      </svg>
+      <span>BigZ <span class="brand-gradient">OS</span></span>
+    </div>
+    <nav>
+      <a href="#edicoes">Edições</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="https://github.com/BigZ-OS/BigZ-OS" class="btn-github">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="badge-pill">
+      ⚡ Projeto 100% Open Source • Auditável • Gratuito
+    </div>
+    <h1>O seu sistema, com a sua identidade.</h1>
+    <p>
+      Um ecossistema aberto e seguro para transformar a sua instalação oficial do Windows 11 em um ambiente sob medida: focado em produtividade para desenvolvedores, equilibrado para o dia a dia ou ajustado para jogos.
+    </p>
+    <div class="cta-group">
+      <a href="#toolbox" class="btn-primary">Conhecer a Toolbox</a>
+      <a href="#edicoes" class="btn-secondary">Ver as 3 Edições</a>
+    </div>
+  </section>
+
+  <!-- 3 Edições -->
+  <section id="edicoes" class="section-container">
+    <div class="section-title">
+      <h2>Três Edições, Um Só Propósito</h2>
+      <p>Escolha a experiência ideal para a sua rotina, com presets visuais opcionais e reversíveis.</p>
+    </div>
+
+    <div class="grid-editions">
+      <!-- Card DEV -->
+      <div class="card card-dev">
+        <span class="card-tag tag-dev">DESENVOLVEDORES</span>
+        <h3>BigZ DEV</h3>
+        <p>Pronto para codar desde o primeiro minuto. Acesso rápido ao terminal, integração total com WSL e ferramentas essenciais pré-configuradas.</p>
+        <ul class="card-features">
+          <li>Windows Terminal & VS Code integrados</li>
+          <li>Menu de contexto rápido para Git e WSL</li>
+          <li>Opção de Open-Shell Dark produtivo</li>
+          <li>Explorador compacto com extensões visíveis</li>
+        </ul>
+      </div>
+
+      <!-- Card Balanced -->
+      <div class="card card-balanced">
+        <span class="card-tag tag-balanced">USO GERAL & DESIGN</span>
+        <h3>BigZ Balanced</h3>
+        <p>O equilíbrio ideal entre beleza, conforto visual e estabilidade. Visual Fluent moderno, zero bloatware e segurança padrão ativa.</p>
+        <ul class="card-features">
+          <li>Taskbar translúcida dinâmica opcional</li>
+          <li>Menu Iniciar limpo e livre de anúncios</li>
+          <li>Windows Update e Defender 100% preservados</li>
+          <li>Navegação ágil com o melhor do Fluent Design</li>
+        </ul>
+      </div>
+
+      <!-- Card Full Performance -->
+      <div class="card card-perf">
+        <span class="card-tag tag-perf">GAMERS & POTÊNCIA</span>
+        <h3>BigZ Full Performance</h3>
+        <p>Ajustado para máxima responsividade e consistência. Efeitos secundários reduzidos, Xbox Game Bar mantida e foco total no jogo.</p>
+        <ul class="card-features">
+          <li>Zero efeitos pesados no DWM por padrão</li>
+          <li>Xbox Game Bar preservada para jogos</li>
+          <li>Menu instantâneo ultra-responsivo</li>
+          <li>Serviços de telemetria desnecessários desligados</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção da Toolbox -->
+  <section id="toolbox" class="section-container">
+    <div class="toolbox-banner">
+      <div class="toolbox-info">
+        <div class="badge-pill" style="margin-bottom: 1rem;">🛠️ Pós-Instalação Transparente</div>
+        <h3>BigZ OS Toolbox</h3>
+        <p>
+          Chega de ferramentas opacas. Nossa Toolbox opera sobre o instalador oficial do Windows, exibe exatamente o que será alterado antes de aplicar (dry-run) e possui um botão de rollback seguro para desfazer qualquer modificação.
+        </p>
+        <ul class="card-features" style="border: none; padding: 0; margin-bottom: 1.5rem;">
+          <li><b>Modo Dry-Run:</b> veja o plano de execução antes de qualquer alteração</li>
+          <li><b>Reversão real:</b> volte ao estado padrão do Windows a qualquer momento</li>
+          <li><b>Winget Oficial:</b> instale navegadores e apps de fontes auditáveis</li>
+        </ul>
+        <a href="https://github.com/BigZ-OS/BigZ-OS" class="btn-primary">Ver Código no GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferenciais / Segurança -->
+  <section id="seguranca" class="section-container">
+    <div class="section-title">
+      <h2>Segurança e Transparência em Primeiro Lugar</h2>
+      <p>Diferente de ISOs modificadas de fóruns, o BigZ OS prioriza a sua integridade digital.</p>
+    </div>
+
+    <div class="grid-features">
+      <div class="feature-box">
+        <div class="feature-icon">🛡️</div>
+        <h4>Sem ISOs de Terceiros</h4>
+        <p>Você utiliza a sua própria ISO oficial da Microsoft. Nosso script builder e a toolbox são executados localmente.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">🔍</div>
+        <h4>100% Auditável</h4>
+        <p>Todo o código é público e licenciado sob GPL-3.0. Sem binários compilados em segredo ou ativadores suspeitos.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">🔒</div>
+        <h4>Segurança Preservada</h4>
+        <p>Windows Defender, SmartScreen, UAC e Windows Update continuam ativos por padrão em todas as edições.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">☕</div>
+        <h4>Totalmente Gratuito</h4>
+        <p>Sem paywalls, sem assinaturas e sem recursos bloqueados. Um projeto feito por e para a comunidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <div class="brand" style="margin-bottom: 0.75rem;">
+          <span>BigZ <span class="brand-gradient">OS</span></span>
+        </div>
+        <p class="disclaimer">
+          O BigZ OS é um projeto de software livre independente desenvolvido pela comunidade.<br>
+          <b>Aviso legal de marca:</b> BigZ OS não é afiliado à Microsoft; Windows é marca da Microsoft Corporation.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/BigZ-OS/BigZ-OS">GitHub</a>
+        <a href="#edicoes">Edições</a>
+        <a href="#toolbox">Toolbox</a>
+        <a href="https://buymeacoffee.com">Apoie o Projeto</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

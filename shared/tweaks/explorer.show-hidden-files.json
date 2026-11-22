@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "explorer.show-hidden-files",
+  "description": "Mostrar arquivos ocultos no Explorer",
+  "risk": "low",
+  "editions": [
+    "dev",
+    "balanced"
+  ],
+  "phase": "online",
+  "scope": "currentUser",
+  "requires": {
+    "builds": [
+      26200
+    ],
+    "architectures": [
+      "x64"
+    ],
+    "admin": false
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "action": {
+    "type": "registry.setValue",
+    "key": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "Hidden",
+    "valueType": "DWord",
+    "value": 1
+  },
+  "verify": {
+    "type": "registry.matchesAction"
+  },
+  "rollback": {
+    "type": "restoreSnapshot"
+  },
+  "restart": "none",
+  "securityImpact": "none",
+  "source": "https://github.com/ChrisTitusTech/winutil/blob/70c23c80641d7370532af2f619b2842658600842/config/tweaks.json"
+}

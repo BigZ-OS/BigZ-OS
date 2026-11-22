@@ -1,0 +1,272 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tb-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+    <linearGradient id="sidebar-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#090D16" />
+    </linearGradient>
+    <linearGradient id="accent-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <!-- App Window Background -->
+  <rect width="1200" height="800" rx="16" fill="url(#tb-bg)" stroke="#334155" stroke-width="2" />
+
+  <!-- Window Titlebar -->
+  <g id="titlebar">
+    <rect width="1200" height="44" rx="16" fill="#090D16" />
+    <!-- Window Controls -->
+    <circle cx="28" cy="22" r="6" fill="#EF4444" />
+    <circle cx="48" cy="22" r="6" fill="#F59E0B" />
+    <circle cx="68" cy="22" r="6" fill="#10B981" />
+    <!-- Window Title -->
+    <text x="600" y="27" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#94A3B8" text-anchor="middle">
+      BigZ OS Toolbox — v0.1.0-alpha [Edição Atual: DEV]
+    </text>
+  </g>
+
+  <!-- Left Sidebar (width 260px) -->
+  <g id="sidebar" transform="translate(0, 44)">
+    <rect width="260" height="756" fill="url(#sidebar-grad)" stroke="#1E293B" stroke-width="1" />
+    
+    <!-- Branding Header -->
+    <g transform="translate(24, 28)">
+      <rect width="40" height="40" rx="8" fill="url(#accent-cyan)" />
+      <text x="20" y="27" font-family="'Inter', sans-serif" font-size="20" font-weight="900" fill="#FFFFFF" text-anchor="middle">Z</text>
+      <text x="52" y="26" font-family="'Inter', sans-serif" font-size="20" font-weight="900" fill="#F8FAFC">BigZ <tspan fill="#06B6D4">OS</tspan></text>
+      <text x="54" y="38" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#64748B" letter-spacing="1">TOOLBOX</text>
+    </g>
+
+    <!-- Nav Items -->
+    <g transform="translate(16, 100)">
+      <!-- Item Ativo: Dashboard / Início -->
+      <rect width="228" height="42" rx="8" fill="#1E293B" stroke="#06B6D4" stroke-width="1" />
+      <text x="44" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#38BDF8">⚡ Visão Geral / Início</text>
+      <circle cx="24" cy="21" r="5" fill="#38BDF8" />
+
+      <!-- Item 2: Shell & UX -->
+      <g transform="translate(0, 52)">
+        <rect width="228" height="42" rx="8" fill="transparent" />
+        <text x="44" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94A3B8">🎨 Shell & Customização</text>
+      </g>
+
+      <!-- Item 3: Apps & Navegadores -->
+      <g transform="translate(0, 104)">
+        <rect width="228" height="42" rx="8" fill="transparent" />
+        <text x="44" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94A3B8">📦 Apps & Navegadores</text>
+      </g>
+
+      <!-- Item 4: Dev Hub -->
+      <g transform="translate(0, 156)">
+        <rect width="228" height="42" rx="8" fill="transparent" />
+        <text x="44" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94A3B8">💻 Dev Hub & Terminal</text>
+      </g>
+
+      <!-- Item 5: Tweaks & Desempenho -->
+      <g transform="translate(0, 208)">
+        <rect width="228" height="42" rx="8" fill="transparent" />
+        <text x="44" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94A3B8">🚀 Tweaks & Performance</text>
+      </g>
+
+      <!-- Item 6: Segurança & Privacidade -->
+      <g transform="translate(0, 260)">
+        <rect width="228" height="42" rx="8" fill="transparent" />
+        <text x="44" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94A3B8">🛡️ Segurança & Bloatware</text>
+      </g>
+    </g>
+
+    <!-- Sidebar Footer -->
+    <g transform="translate(20, 660)">
+      <rect width="220" height="70" rx="10" fill="#111827" stroke="#1E293B" stroke-width="1" />
+      <text x="16" y="26" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#F8FAFC">Apoie o Projeto</text>
+      <text x="16" y="44" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">100% Livre & Gratuito</text>
+      <rect x="130" y="16" width="76" height="36" rx="6" fill="#F59E0B" />
+      <text x="168" y="38" font-family="'Inter', sans-serif" font-size="11" font-weight="800" fill="#000000" text-anchor="middle">☕ Coffee</text>
+    </g>
+  </g>
+
+  <!-- Main Content Area (width 940px, height 756px) -->
+  <g id="main-content" transform="translate(260, 44)">
+    <!-- Header Banner -->
+    <g transform="translate(32, 28)">
+      <text x="0" y="24" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#F8FAFC">Painel de Controle BigZ OS</text>
+      <text x="0" y="46" font-family="'Inter', sans-serif" font-size="13" font-weight="400" fill="#94A3B8">
+        Personalize seu Windows de forma segura, auditável e 100% reversível.
+      </text>
+
+      <!-- System Quick Status Pill -->
+      <g transform="translate(620, 4)">
+        <rect width="250" height="42" rx="21" fill="#111827" stroke="#334155" stroke-width="1" />
+        <circle cx="20" cy="21" r="6" fill="#10B981" />
+        <text x="36" y="26" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#E2E8F0">Win 11 24H2 • RAM: 3.2/16 GB</text>
+      </g>
+    </g>
+
+    <!-- SECTION 1: SELEÇÃO DE EDIÇÃO ATIVA (Cards) -->
+    <g transform="translate(32, 100)">
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#CBD5E1" letter-spacing="1">
+        SELECIONE O PERFIL DE EDIÇÃO:
+      </text>
+
+      <!-- Card DEV (Selecionado) -->
+      <g transform="translate(0, 16)">
+        <rect width="280" height="150" rx="12" fill="url(#card-grad)" stroke="#10B981" stroke-width="2" />
+        <rect x="18" y="18" width="60" height="24" rx="4" fill="#064E3B" />
+        <text x="48" y="34" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="800" fill="#34D399" text-anchor="middle">DEV</text>
+        <circle cx="255" cy="30" r="8" fill="#10B981" />
+        <path d="M 251 30 L 254 33 L 259 27" fill="none" stroke="#000" stroke-width="2" />
+
+        <text x="18" y="70" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#F8FAFC">Desenvolvedor</text>
+        <text x="18" y="92" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          Shell otimizado com Terminal, Git, Open-Shell clássico, Nilesoft Dev Menu.
+        </text>
+        <rect x="18" y="112" width="244" height="24" rx="4" fill="#047857" opacity="0.3" />
+        <text x="140" y="128" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#10B981" text-anchor="middle">PERFIL ATIVO</text>
+      </g>
+
+      <!-- Card BALANCED -->
+      <g transform="translate(296, 16)">
+        <rect width="280" height="150" rx="12" fill="url(#card-grad)" stroke="#334155" stroke-width="1.5" />
+        <rect x="18" y="18" width="80" height="24" rx="4" fill="#1E3A8A" />
+        <text x="58" y="34" font-family="'Inter', sans-serif" font-size="11" font-weight="800" fill="#93C5FD" text-anchor="middle">BALANCED</text>
+
+        <text x="18" y="70" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#F8FAFC">Equilíbrio & Design</text>
+        <text x="18" y="92" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          Beleza do Fluent Design, TranslucentTB sutil, estabilidade máxima e apps essenciais.
+        </text>
+        <rect x="18" y="112" width="244" height="24" rx="4" fill="#1E293B" />
+        <text x="140" y="128" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94A3B8" text-anchor="middle">Aplicar Preset</text>
+      </g>
+
+      <!-- Card FULL PERFORMANCE -->
+      <g transform="translate(592, 16)">
+        <rect width="280" height="150" rx="12" fill="url(#card-grad)" stroke="#334155" stroke-width="1.5" />
+        <rect x="18" y="18" width="100" height="24" rx="4" fill="#450A0A" />
+        <text x="68" y="34" font-family="'Inter', sans-serif" font-size="11" font-weight="800" fill="#FCA5A5" text-anchor="middle">PERFORMANCE</text>
+
+        <text x="18" y="70" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#F8FAFC">Extremo / Gamers</text>
+        <text x="18" y="92" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          Zero efeitos visuais, latência mínima DPC, som desativado, shell ultra-leve sem bloat.
+        </text>
+        <rect x="18" y="112" width="244" height="24" rx="4" fill="#1E293B" />
+        <text x="140" y="128" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94A3B8" text-anchor="middle">Aplicar Preset</text>
+      </g>
+    </g>
+
+    <!-- SECTION 2: CONFIGURAÇÕES DE SHELL RÁPIDAS -->
+    <g transform="translate(32, 300)">
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#CBD5E1" letter-spacing="1">
+        PERSONALIZAÇÃO DO SHELL EM 1-CLIQUE:
+      </text>
+
+      <g transform="translate(0, 16)">
+        <rect width="872" height="180" rx="12" fill="url(#card-grad)" stroke="#1E293B" stroke-width="1" />
+        
+        <!-- Toggle 1: Taskbar Style -->
+        <g transform="translate(24, 24)">
+          <text x="0" y="16" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">Estilo da Barra de Tarefas</text>
+          <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">Alinhamento e transparência (TranslucentTB)</text>
+          <rect x="260" y="4" width="120" height="28" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+          <text x="320" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#38BDF8" text-anchor="middle">Esquerda + Clear</text>
+        </g>
+
+        <!-- Toggle 2: Menu Iniciar -->
+        <g transform="translate(460, 24)">
+          <text x="0" y="16" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">Menu Iniciar</text>
+          <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">Motor de menu leve (Open-Shell vs Win11 Clean)</text>
+          <rect x="260" y="4" width="120" height="28" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+          <text x="320" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#38BDF8" text-anchor="middle">Open-Shell Dark</text>
+        </g>
+
+        <line x1="24" y1="84" x2="848" y2="84" stroke="#334155" stroke-width="1" opacity="0.3" />
+
+        <!-- Toggle 3: Menu de Contexto -->
+        <g transform="translate(24, 106)">
+          <text x="0" y="16" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">Menu de Contexto do Botão Direito</text>
+          <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">Nilesoft Shell com atalhos Dev e remoção de poluição</text>
+          <rect x="360" y="8" width="44" height="22" rx="11" fill="#10B981" />
+          <circle cx="393" cy="19" r="8" fill="#FFFFFF" />
+        </g>
+
+        <!-- Toggle 4: Explorer Compacto -->
+        <g transform="translate(460, 106)">
+          <text x="0" y="16" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">Explorer Otimizado</text>
+          <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">Visualização compacta, Este Computador como padrão</text>
+          <rect x="360" y="8" width="44" height="22" rx="11" fill="#10B981" />
+          <circle cx="393" cy="19" r="8" fill="#FFFFFF" />
+        </g>
+      </g>
+    </g>
+
+    <!-- SECTION 3: APPS RECOMENDADOS RÁPIDOS (Winget) -->
+    <g transform="translate(32, 516)">
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#CBD5E1" letter-spacing="1">
+        INSTALAÇÃO DE FERRAMENTAS RECOMENDADAS (WINGET):
+      </text>
+
+      <g transform="translate(0, 16)">
+        <rect width="872" height="120" rx="12" fill="url(#card-grad)" stroke="#1E293B" stroke-width="1" />
+        
+        <!-- App 1: Browser -->
+        <g transform="translate(24, 24)">
+          <rect width="180" height="72" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+          <text x="16" y="28" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#F8FAFC">Navegador Principal</text>
+          <text x="16" y="46" font-family="'Inter', sans-serif" font-size="11" fill="#10B981">Brave / Firefox Librewolf</text>
+          <circle cx="155" cy="36" r="6" fill="#10B981" />
+        </g>
+
+        <!-- App 2: Terminal -->
+        <g transform="translate(224, 24)">
+          <rect width="180" height="72" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+          <text x="16" y="28" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#F8FAFC">Terminal Moderno</text>
+          <text x="16" y="46" font-family="'Inter', sans-serif" font-size="11" fill="#10B981">Windows Terminal + OhMyPosh</text>
+          <circle cx="155" cy="36" r="6" fill="#10B981" />
+        </g>
+
+        <!-- App 3: Dev Suite -->
+        <g transform="translate(424, 24)">
+          <rect width="180" height="72" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+          <text x="16" y="28" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#F8FAFC">Dev Suite</text>
+          <text x="16" y="46" font-family="'Inter', sans-serif" font-size="11" fill="#10B981">VS Code + Git + 7-Zip</text>
+          <circle cx="155" cy="36" r="6" fill="#10B981" />
+        </g>
+
+        <!-- Action Button: Apply -->
+        <g transform="translate(628, 36)">
+          <rect width="216" height="46" rx="8" fill="url(#accent-cyan)" />
+          <text x="108" y="28" font-family="'Inter', sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">
+            Instalar Selecionados
+          </text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Bottom Action Bar / Rollback Footer -->
+    <g transform="translate(32, 680)">
+      <!-- Safe Rollback Button -->
+      <rect width="220" height="40" rx="8" fill="#1E293B" stroke="#EF4444" stroke-width="1" />
+      <text x="110" y="25" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#F87171" text-anchor="middle">
+        ↺ Rollback / Restaurar Padrão
+      </text>
+
+      <!-- Status Bar -->
+      <text x="250" y="25" font-family="'Inter', sans-serif" font-size="12" fill="#64748B">
+        Todos os scripts são transparentes, auditáveis e executados via PowerShell / Winget oficial.
+      </text>
+
+      <!-- GitHub Link -->
+      <text x="872" y="25" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#06B6D4" text-anchor="end">
+        github.com/bigz-os/toolbox
+      </text>
+    </g>
+  </g>
+</svg>

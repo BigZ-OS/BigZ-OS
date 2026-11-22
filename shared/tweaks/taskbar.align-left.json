@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "taskbar.align-left",
+  "description": "Alinhar os ícones da barra à esquerda",
+  "risk": "low",
+  "editions": [
+    "dev",
+    "balanced",
+    "full-performance"
+  ],
+  "phase": "online",
+  "scope": "currentUser",
+  "requires": {
+    "builds": [
+      26200
+    ],
+    "architectures": [
+      "x64"
+    ],
+    "admin": false
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "action": {
+    "type": "registry.setValue",
+    "key": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "TaskbarAl",
+    "valueType": "DWord",
+    "value": 0
+  },
+  "verify": {
+    "type": "registry.matchesAction"
+  },
+  "rollback": {
+    "type": "restoreSnapshot"
+  },
+  "restart": "none",
+  "securityImpact": "none",
+  "source": "https://github.com/Raphire/Win11Debloat/blob/master/Regfiles/Align_Taskbar_Left.reg"
+}

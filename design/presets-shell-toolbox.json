@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.1.0",
+  "description": "Especificação de presets de customização de shell para o protótipo da BigZ OS Toolbox",
+  "tools": {
+    "open_shell": {
+      "id": "open_shell",
+      "name": "Open-Shell Menu",
+      "package": "Open-Shell.Open-Shell-Menu",
+      "license": "MIT",
+      "presets": [
+        {
+          "id": "shell-openshell-dev",
+          "name": "Open-Shell DEV Dark",
+          "description": "Menu escuro compacto com atalhos para Terminal, WSL, VS Code e pasta C:\\DEV.",
+          "configFile": "assets/presets/openshell/dev-dark.xml"
+        },
+        {
+          "id": "shell-openshell-balanced",
+          "name": "Open-Shell Clean Fluent",
+          "description": "Estilo clássico limpo com cantos arredondados e fontes modernas.",
+          "configFile": "assets/presets/openshell/balanced.xml"
+        },
+        {
+          "id": "shell-openshell-perf",
+          "name": "Open-Shell Minimal Gamer",
+          "description": "Menu ultra-enxuto com animações desativadas, busca local e foco em agilidade.",
+          "configFile": "assets/presets/openshell/perf-minimal.xml"
+        }
+      ]
+    },
+    "nilesoft_shell": {
+      "id": "nilesoft_shell",
+      "name": "Nilesoft Shell",
+      "package": "Nilesoft.Shell",
+      "license": "MIT",
+      "presets": [
+        {
+          "id": "shell-nilesoft-dev",
+          "name": "Nilesoft Dev Actions",
+          "description": "Menu de contexto otimizado com 'Abrir no Terminal', 'Abrir no VS Code' e 'Git Bash' no topo.",
+          "configFile": "assets/presets/nilesoft/dev-shell.nss"
+        },
+        {
+          "id": "shell-nilesoft-balanced",
+          "name": "Nilesoft Fluent Clean",
+          "description": "Menu contextual translúcido sem os itens redundantes do Windows 11.",
+          "configFile": "assets/presets/nilesoft/balanced-shell.nss"
+        },
+        {
+          "id": "shell-nilesoft-minimal",
+          "name": "Nilesoft Minimal Core",
+          "description": "Apenas ações essenciais de arquivo com ícones compactos e sem submenus aninhados.",
+          "configFile": "assets/presets/nilesoft/perf-shell.nss"
+        }
+      ]
+    },
+    "translucenttb": {
+      "id": "translucenttb",
+      "name": "TranslucentTB",
+      "package": "CharlesMilette.TranslucentTB",
+      "license": "GPL-3.0",
+      "presets": [
+        {
+          "id": "shell-translucent-acrylic",
+          "name": "TranslucentTB Dark Acrylic",
+          "description": "Acrílico sutil escuro (15% de desfoque) para alto contraste com janelas de código.",
+          "configParams": { "accent": "acrylic", "color": "#0B0F19", "opacity": 0.85 }
+        },
+        {
+          "id": "shell-translucent-fluent",
+          "name": "TranslucentTB Dynamic Fluent",
+          "description": "Transparente na Área de Trabalho e acrílico com blur suave ao maximizar janela.",
+          "configParams": { "desktop": "clear", "maximized": "acrylic", "color": "#0F172A" }
+        },
+        {
+          "id": "shell-translucent-disabled",
+          "name": "TranslucentTB Desativado (Nativo Sólido)",
+          "description": "Sem efeito de transparência para minimizar processamento do DWM.",
+          "configParams": { "enabled": false }
+        }
+      ]
+    }
+  },
+  "editions": {
+    "DEV": {
+      "name": "BigZ OS DEV",
+      "accentColor": "#10B981",
+      "defaults": {
+        "open_shell": { "enabled": true, "presetId": "shell-openshell-dev" },
+        "nilesoft_shell": { "enabled": true, "presetId": "shell-nilesoft-dev" },
+        "translucenttb": { "enabled": true, "presetId": "shell-translucent-acrylic" }
+      }
+    },
+    "Balanced": {
+      "name": "BigZ OS Balanced",
+      "accentColor": "#3B82F6",
+      "defaults": {
+        "open_shell": { "enabled": false, "presetId": "shell-openshell-balanced" },
+        "nilesoft_shell": { "enabled": true, "presetId": "shell-nilesoft-balanced" },
+        "translucenttb": { "enabled": true, "presetId": "shell-translucent-fluent" }
+      }
+    },
+    "Full Performance": {
+      "name": "BigZ OS Full Performance",
+      "accentColor": "#F97316",
+      "defaults": {
+        "open_shell": { "enabled": true, "presetId": "shell-openshell-perf" },
+        "nilesoft_shell": { "enabled": false, "presetId": "shell-nilesoft-minimal" },
+        "translucenttb": { "enabled": false, "presetId": "shell-translucent-disabled" }
+      }
+    }
+  }
+}

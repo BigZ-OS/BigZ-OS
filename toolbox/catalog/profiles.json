@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "id": "dev",
+      "firstUseAppDefaults": [
+        "git",
+        "vscode",
+        "windows-terminal"
+      ],
+      "firstUseDefaults": []
+    },
+    {
+      "id": "balanced",
+      "firstUseAppDefaults": [],
+      "firstUseDefaults": []
+    },
+    {
+      "id": "full-performance",
+      "firstUseAppDefaults": [],
+      "firstUseDefaults": []
+    }
+  ]
+}

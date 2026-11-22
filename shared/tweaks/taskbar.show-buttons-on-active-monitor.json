@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "taskbar.show-buttons-on-active-monitor",
+  "description": "Mostrar botões na barra do monitor da janela",
+  "risk": "low",
+  "editions": [
+    "dev",
+    "balanced",
+    "full-performance"
+  ],
+  "phase": "online",
+  "scope": "currentUser",
+  "requires": {
+    "builds": [
+      26200
+    ],
+    "architectures": [
+      "x64"
+    ],
+    "admin": false
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "action": {
+    "type": "registry.setValue",
+    "key": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "MMTaskbarMode",
+    "valueType": "DWord",
+    "value": 2
+  },
+  "verify": {
+    "type": "registry.matchesAction"
+  },
+  "rollback": {
+    "type": "restoreSnapshot"
+  },
+  "restart": "none",
+  "securityImpact": "none",
+  "source": "https://github.com/Raphire/Win11Debloat/blob/master/Regfiles/MMTaskbarMode_Active.reg"
+}

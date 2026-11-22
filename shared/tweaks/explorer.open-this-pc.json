@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "explorer.open-this-pc",
+  "description": "Abrir o Explorador em Este Computador",
+  "risk": "low",
+  "editions": [
+    "dev",
+    "balanced",
+    "full-performance"
+  ],
+  "phase": "online",
+  "scope": "currentUser",
+  "requires": {
+    "builds": [
+      26200
+    ],
+    "architectures": [
+      "x64"
+    ],
+    "admin": false
+  },
+  "dependsOn": [],
+  "conflictsWith": [],
+  "action": {
+    "type": "registry.setValue",
+    "key": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "LaunchTo",
+    "valueType": "DWord",
+    "value": 1
+  },
+  "verify": {
+    "type": "registry.matchesAction"
+  },
+  "rollback": {
+    "type": "restoreSnapshot"
+  },
+  "restart": "none",
+  "securityImpact": "none",
+  "source": "https://github.com/Raphire/Win11Debloat/blob/master/Regfiles/Launch_File_Explorer_To_This_PC.reg"
+}
