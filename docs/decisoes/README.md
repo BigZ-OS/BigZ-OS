@@ -13,6 +13,7 @@ Formato curto: **Status · Contexto · Decisão · Consequências · Fontes**. U
 | [007](ADR-007-sem-ativadores.md) | Nada de ativadores, KMS ou MAS | Aceita | Beatrix |
 | [008](ADR-008-reuso-de-codigo-de-terceiros.md) | Reuso de código de terceiros conforme a licença | Aceita | Tellah |
 | [009](ADR-009-infraestrutura.md) | Infra: Cloudflare Pages/Workers/D1 + GitHub Pages + Releases; telemetria desligada | Aceita (execução depende do usuário) | Cloud |
+| [010](ADR-010-licenca-das-vms-de-teste.md) | Licença das VMs de teste: Enterprise Evaluation 90 dias; restrições do `-TestOnly` | Aceita (a ratificar) | Beatrix |
 
 Base: [Plano consolidado](../03-plano-consolidado.md) · [Carta](../00-CARTA-DO-PROJETO.md).
 

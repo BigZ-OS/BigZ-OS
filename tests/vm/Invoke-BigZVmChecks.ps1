@@ -35,6 +35,7 @@ param(
 
     [switch]$SkipOnlineSearch,
     [switch]$SkipActivation,
+    [switch]$SkipWinget,
     [switch]$IncludeMutating,
     [switch]$AllowWsus,
     [switch]$InstallPester,
@@ -100,6 +101,7 @@ $container = New-PesterContainer -Path (Join-Path $PSScriptRoot 'P0.VmState.Test
 $exclude = @()
 if ($SkipOnlineSearch) { $exclude += 'Online' }
 if ($SkipActivation) { $exclude += 'Activation' }
+if ($SkipWinget) { $exclude += 'Winget' }   # ex.: sessão PowerShell Direct, onde o winget pode não estar registrado
 if (-not $IncludeMutating) { $exclude += 'Mutating' }
 
 $config = New-PesterConfiguration
