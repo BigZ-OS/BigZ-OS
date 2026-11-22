@@ -40,8 +40,8 @@ function Read-BigZCatalog {
         translucenttb = 'translucenttb'
     }
     $designEditions = @{ dev = 'DEV'; balanced = 'Balanced'; 'full-performance' = 'Full Performance' }
-    $presets = foreach ($profile in $profiles.profiles) {
-        $editionName = $designEditions[$profile.id]
+    $presets = foreach ($editionProfile in $profiles.profiles) {
+        $editionName = $designEditions[$editionProfile.id]
         $definition = $design.editions.PSObject.Properties[$editionName].Value
         foreach ($setting in $definition.defaults.PSObject.Properties) {
             $tool = $design.tools.PSObject.Properties[$setting.Name].Value
@@ -62,7 +62,7 @@ function Read-BigZCatalog {
                 id = $preset.id
                 name = $preset.name
                 description = $preset.description
-                editions = @($profile.id)
+                editions = @($editionProfile.id)
                 risk = $risk
                 dependsOn = $dependencies
                 conflictsWith = @()
@@ -94,12 +94,12 @@ function Read-BigZCatalog {
     }
 }
 
-function Get-BigZDefaultIds {
+function Get-BigZDefaultId {
     param($Catalog, [string]$Edition)
 
-    $profile = $Catalog.Profiles | Where-Object { $_.id -eq $Edition }
-    $profile.firstUseAppDefaults
-    $profile.firstUseDefaults
+    $editionProfile = $Catalog.Profiles | Where-Object { $_.id -eq $Edition }
+    $editionProfile.firstUseAppDefaults
+    $editionProfile.firstUseDefaults
     $Catalog.Lists.preset | Where-Object { $_.defaultSelected -and $Edition -in $_.editions } |
         ForEach-Object { $_.id }
 }
@@ -122,7 +122,7 @@ function Add-BigZPlanEntry {
     $State.Ordered.Add($record)
 }
 
-function New-BigZToolboxPlan {
+function Get-BigZToolboxPlan {
     param($Catalog, [string]$Edition, [string[]]$Id)
 
     $state = @{
@@ -218,7 +218,7 @@ function New-BigZToolboxPlan {
     }
 }
 
-function New-BigZToolboxUndoPlan {
+function Get-BigZToolboxUndoPlan {
     param($Plan)
 
     for ($i = $Plan.Items.Count - 1; $i -ge 0; $i--) {

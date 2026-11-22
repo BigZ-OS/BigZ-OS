@@ -21,9 +21,9 @@ $script:catalog = Read-BigZCatalog (Split-Path $PSScriptRoot -Parent)
 
 if ($Plan) {
     if (-not $PSBoundParameters.ContainsKey('Id')) {
-        $Id = @(Get-BigZDefaultIds $script:catalog $Edition)
+        $Id = @(Get-BigZDefaultId $script:catalog $Edition)
     }
-    New-BigZToolboxPlan $script:catalog $Edition $Id
+    Get-BigZToolboxPlan $script:catalog $Edition $Id
     return
 }
 
@@ -49,9 +49,9 @@ $script:lastPlan = $null
 $script:riskLabels = @{ low = 'Baixo'; medium = 'Médio'; high = 'Alto' }
 $script:riskColors = @{ low = '#86EFAC'; medium = '#FDE68A'; high = '#FCA5A5' }
 
-function Get-BigZEditionRows {
+function Get-BigZEditionView {
     if (-not $script:editionRows.ContainsKey($script:editionNow)) {
-        $defaults = @(Get-BigZDefaultIds $script:catalog $script:editionNow)
+        $defaults = @(Get-BigZDefaultId $script:catalog $script:editionNow)
         $byKind = @{}
         foreach ($kind in $script:catalog.Lists.Keys) {
             $byKind[$kind] = @(
@@ -73,10 +73,10 @@ function Get-BigZEditionRows {
     $script:editionRows[$script:editionNow]
 }
 
-function Update-BigZCatalogView {
+function Show-BigZCatalogSection {
     $section = $script:ui.Navigation.SelectedItem.Tag
     if ($section) {
-        $rows = Get-BigZEditionRows
+        $rows = Get-BigZEditionView
         $script:ui.CatalogGrid.ItemsSource = $rows[$section]
     }
 }
@@ -101,26 +101,26 @@ function Show-BigZPlan {
     $script:ui.PlanText.Text = $lines -join [Environment]::NewLine
 }
 
-$script:ui.Navigation.Add_SelectionChanged({ Update-BigZCatalogView })
+$script:ui.Navigation.Add_SelectionChanged({ Show-BigZCatalogSection })
 foreach ($name in 'DevRadio', 'BalancedRadio', 'FullRadio') {
     $script:ui[$name].Add_Checked({
-        param($sender, $eventArgs)
-        $script:editionNow = [string]$sender.Tag
+        param($sourceControl)
+        $script:editionNow = [string]$sourceControl.Tag
         $script:lastPlan = $null
         $script:ui.UndoButton.IsEnabled = $false
         $script:ui.PlanText.Text = 'Marque os itens e selecione Ver plano.'
-        Update-BigZCatalogView
+        Show-BigZCatalogSection
     })
     if ($script:ui[$name].Tag -eq $Edition) { $script:ui[$name].IsChecked = $true }
 }
 $script:ui.Navigation.SelectedIndex = 0
 $script:ui.PlanButton.Add_Click({
     try {
-        $rows = Get-BigZEditionRows
+        $rows = Get-BigZEditionView
         $selected = @(foreach ($kind in 'app', 'tweak', 'preset') {
             $rows[$kind] | Where-Object { $_.Selected } | ForEach-Object { $_.Id }
         })
-        $script:lastPlan = New-BigZToolboxPlan $script:catalog $script:editionNow $selected
+        $script:lastPlan = Get-BigZToolboxPlan $script:catalog $script:editionNow $selected
         $script:ui.UndoButton.IsEnabled = $script:lastPlan.Items.Count -gt 0
         Show-BigZPlan $script:lastPlan
     } catch {
@@ -131,7 +131,7 @@ $script:ui.PlanButton.Add_Click({
 })
 $script:ui.UndoButton.Add_Click({
     $lines = @('Reversão simulada. Nenhuma alteração foi aplicada nesta sessão.', '')
-    foreach ($step in (New-BigZToolboxUndoPlan $script:lastPlan)) {
+    foreach ($step in (Get-BigZToolboxUndoPlan $script:lastPlan)) {
         $lines += "$($step.Name): $($step.Details)"
     }
     $script:ui.PlanText.Text = $lines -join [Environment]::NewLine
