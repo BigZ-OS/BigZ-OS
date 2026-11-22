@@ -56,9 +56,11 @@ Após interrupção, encontre o ID mostrado no erro ou no diretório `work\job-�
 .\builder\Build-BigZIso.ps1 -RecoverJob '<GUID-do-job>' -WorkRoot 'C:\DEV\BigZ-Lab\work'
 ```
 
-A recuperação descarrega a hive do job, descarta sua montagem identificada do WIM e desconecta a ISO quando o dispositivo coincide com o diário. Se a propriedade da montagem estiver incerta, preserve o job e use a mensagem e `dism.log` para diagnosticar. A preparação de uma nova mídia parte da ISO original. Em caso de interrupção durante a publicação, uma pasta temporária ou arquivos auxiliares sem a ISO podem permanecer em `out`. Confira-os pelo job antes de reutilizar o nome de saída.
+A recuperação descarrega a hive do job, descarta sua montagem identificada do WIM e desconecta a ISO quando o dispositivo coincide com o diário. Se a propriedade da montagem estiver incerta, preserve o job e use a mensagem e `dism.log` para diagnosticar. Se o diário já indica os três recursos liberados, a recuperação apenas registra o estado `recovered`. Em ambos os casos, `-RecoverJob` preserva os logs, o payload de trabalho e os arquivos em `out`, inclusive uma eventual pasta `.bigz-<ID>` com a ISO parcial. Uma nova execução usa outro job e parte da ISO original. O mesmo comando pode ser repetido se a ISO final, o manifesto e o checksum ainda não existirem.
 
-Os testes locais usam arquivos temporários e substituem montagem, DISM, registry offline e oscdimg por simulações:
+`oscdimg.exe`, `reg.exe` e `robocopy.exe` gravam stdout e stderr nos logs do job. As mensagens de falha indicam a etapa, o código de saída quando disponível e o final do log, mesmo sob `$ErrorActionPreference = 'Stop'`. O DISM e a montagem de mídia usam cmdlets com tratamento de erros próprio.
+
+Os testes locais usam arquivos temporários. Montagem, DISM e registro offline são simulados. O teste de stderr executa um processo auxiliar que só grava texto e devolve um código de saída:
 
 ```powershell
 Import-Module Pester -RequiredVersion 5.7.1

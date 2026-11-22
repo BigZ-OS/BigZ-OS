@@ -120,6 +120,7 @@ function Invoke-BigZBuildPipeline {
         [string]$WindowsEdition, [switch]$InspectOnly, [switch]$TestOnly)
 
     $mediaRoot = Open-BigZIso $Job
+    Save-BigZJobState $Job 'inventory'
     $sourceImage = Get-BigZInstallerLayout $mediaRoot
     $inventory = @(Get-BigZImageInventory $sourceImage $Job)
     if (-not $inventory.Count) { throw 'O DISM não encontrou índices no instalador.' }
@@ -146,6 +147,7 @@ function Invoke-BigZBuildPipeline {
     if (-not $selected) { throw 'Escolha -ImageIndex ou -WindowsEdition antes de construir a ISO.' }
     Save-BigZJobState $Job 'copying'
     Copy-BigZInstaller $mediaRoot $Job $Tools
+    Save-BigZJobState $Job 'exporting'
     Export-BigZInstallImage $sourceImage $selected.Index $Job
     $null = Get-BigZInstallerLayout $Job.MediaPath
     Close-BigZIso $Job
@@ -158,6 +160,7 @@ function Invoke-BigZBuildPipeline {
         foreach ($item in $Plan.OfflineTweaks) {
             switch -CaseSensitive ($item.Action.type) {
                 'appx.deprovision' {
+                    Save-BigZJobState $Job 'servicing-appx'
                     $change = Invoke-BigZAppxDeprovision $Job $item.Action
                     [pscustomobject]@{ Id = $item.Id; Result = $change.Result; PackageName = $change.PackageName }
                 }
@@ -173,11 +176,13 @@ function Invoke-BigZBuildPipeline {
     Save-BigZJobState $Job 'committing'
     Close-BigZWim $Job -Save
 
+    Save-BigZJobState $Job 'verifying-wim'
     $exported = @(Get-BigZImageInventory $Job.WimPath $Job)
     if ($exported.Count -ne 1 -or $exported[0].Index -ne 1 -or $exported[0].Edition -ine $selected.Edition -or
         $exported[0].Build -ne $selected.Build -or $exported[0].Architecture -ne $selected.Architecture) {
         throw 'O WIM final não preservou a identidade do índice selecionado.'
     }
+    Save-BigZJobState $Job 'writing-answer-file'
     Write-BigZAnswerFile $Job $TemplatePath $selected.DefaultLanguage
     $definition = $Plan | ConvertTo-Json -Depth 10 -Compress
     $sha256 = [Security.Cryptography.SHA256]::Create()
@@ -265,13 +270,13 @@ function Invoke-BigZMediaBuild {
             $result = Invoke-BigZBuildPipeline @pipeline
         }
         catch {
-            $failure = $_
+            $failureMessage = Get-BigZJobFailureMessage $job $_
             try {
                 Close-BigZJobResource $job $tools
                 Save-BigZJobState $job 'failed'
             }
-            catch { Write-Warning "Recuperação pendente para job $($job.Id): $($_.Exception.Message)" }
-            throw "Job $($job.Id) em '$($job.Path)': $($failure.Exception.Message)"
+            catch { Write-Warning "Recuperação pendente para job $($job.Id): $(Get-BigZErrorText $_)" -WarningAction Continue }
+            throw $failureMessage
         }
 
         try {

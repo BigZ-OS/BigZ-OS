@@ -46,6 +46,61 @@ InModuleScope BigZ.Media {
             }
         }
 
+        Context 'processos nativos' {
+            BeforeAll {
+                $nativeTestExe = Join-Path $env:SystemRoot 'System32/WindowsPowerShell/v1.0/powershell.exe'
+                if (-not (Test-Path -LiteralPath $nativeTestExe -PathType Leaf)) { throw 'Windows PowerShell 5.1 ausente para a simulação nativa.' }
+                $nativeTestScript = Join-Path $TestDrive 'native stderr fixture.ps1'
+                @(
+                    'param([int]$Code, [string]$Payload)'
+                    '[Console]::Out.WriteLine("stdout $Payload")'
+                    '[Console]::Error.WriteLine("stderr $Payload")'
+                    'exit $Code'
+                ) | Set-Content -LiteralPath $nativeTestScript -Encoding UTF8
+            }
+
+            It 'registra stdout e stderr sem falhar com código 0 sob ErrorActionPreference Stop' {
+                $ErrorActionPreference = 'Stop'
+                $nativeLog = Join-Path $TestDrive 'native-ok.log'
+                $payload = 'pasta com espaços\'
+                $nativeArgs = @('-NoProfile', '-NonInteractive', '-File', $nativeTestScript, '-Code', '0', '-Payload', $payload)
+                Invoke-BigZNativeCommand $nativeTestExe $nativeArgs $nativeLog | Should -Be 0
+                $logText = Get-Content -LiteralPath $nativeLog -Raw -Encoding UTF8
+                $logText | Should -Match ([regex]::Escape("stdout $payload"))
+                $logText | Should -Match ([regex]::Escape("stderr $payload"))
+                $ErrorActionPreference | Should -Be 'Stop'
+            }
+
+            It 'aceita código 7 com a política do robocopy e relata etapa, código 8 e stderr na falha' {
+                $ErrorActionPreference = 'Stop'
+                $nativeLog = Join-Path $TestDrive 'native-exit.log'
+                $nativeArgs = @('-NoProfile', '-NonInteractive', '-File', $nativeTestScript, '-Code', '7', '-Payload', 'detalhe')
+                Invoke-BigZNativeCommand $nativeTestExe $nativeArgs $nativeLog -MaximumSuccessCode 7 | Should -Be 7
+                $nativeArgs[5] = '8'
+                $failure = $null
+                try { $null = Invoke-BigZNativeCommand $nativeTestExe $nativeArgs $nativeLog -MaximumSuccessCode 7 }
+                catch { $failure = $_ }
+                $failure | Should -Not -BeNullOrEmpty
+
+                $job = @{ Id = 'fixture'; Path = $TestDrive; Record = @{ Stage = 'copying' } }
+                $message = Get-BigZJobFailureMessage $job $failure
+                $message | Should -Match "etapa 'copying'"
+                $message | Should -Match 'código de saída 8'
+                $message | Should -Match 'stderr detalhe'
+            }
+
+            It 'mantém um diagnóstico quando a exceção chega sem mensagem' {
+                $exception = [System.Management.Automation.RemoteException]::new(' ')
+                $record = [System.Management.Automation.ErrorRecord]::new($exception, 'EmptyNativeError',
+                    [System.Management.Automation.ErrorCategory]::InvalidOperation, $null)
+                $job = @{ Id = 'fixture'; Path = $TestDrive; Record = @{ Stage = 'packaging' } }
+                $message = Get-BigZJobFailureMessage $job $record
+                $message | Should -Match "etapa 'packaging'"
+                $message | Should -Match 'EmptyNativeError'
+                $message | Should -Match 'oscdimg\.log.*indisponível'
+            }
+        }
+
         It 'seleciona 25H2 e 26H2 por edição ou índice, sem aceitar ambiguidade' {
             $pro = Get-TestImageFixture
             $homeImage = Get-TestImageFixture -Edition Core -Build 26200 -Index 1

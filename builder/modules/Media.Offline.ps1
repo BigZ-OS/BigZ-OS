@@ -1,12 +1,8 @@
 ﻿function Invoke-BigZHiveCommand {
     param($Tools, [string[]]$ArgumentList, $Job)
 
-    $nativeOutput = @(& $Tools.Reg @ArgumentList)
-    $code = $LASTEXITCODE
-    if ($nativeOutput.Count) {
-        $nativeOutput | Add-Content -LiteralPath (Join-Path $Job.Path 'registry.log') -Encoding UTF8 -ErrorAction Stop
-    }
-    if ($code -ne 0) { throw "reg.exe falhou no job '$($Job.Id)' (código $code)." }
+    $log = Join-Path $Job.Path 'registry.log'
+    $null = Invoke-BigZNativeCommand $Tools.Reg $ArgumentList $log
 }
 
 function Close-BigZOfflineHive {

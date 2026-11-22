@@ -146,9 +146,8 @@ function Copy-BigZInstaller {
     # The dot avoids a trailing backslash directly before native argument quoting.
     $source = Join-Path $SourceRoot '.'
     $copyArgs = @($source, $Job.MediaPath, '/E', '/R:1', '/W:1', '/XJ', '/COPY:DT', '/DCOPY:DT', '/NP',
-        "/LOG:$copyLog", '/XF', 'install.wim', 'install.esd', 'autounattend.xml')
-    & $Tools.Robocopy @copyArgs | Out-Null
-    if ($LASTEXITCODE -gt 7) { throw "Falha na cópia do instalador. Consulte '$copyLog'." }
+        '/XF', 'install.wim', 'install.esd', 'autounattend.xml')
+    $null = Invoke-BigZNativeCommand $Tools.Robocopy $copyArgs $copyLog -MaximumSuccessCode 7
 }
 
 function Export-BigZInstallImage {
@@ -227,8 +226,8 @@ function Invoke-BigZOscdimg {
     }
     # One UEFI El Torito entry, with a boot image from the user's ISO.
     $isoArgs = @('-m', '-o', '-u2', '-udfver102', '-e', '-pEF', "-b$bootFile", "-l$VolumeLabel", $Job.MediaPath, $Path)
-    & $Tools.Oscdimg.Path @isoArgs *> $log
-    if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $Path -PathType Leaf) -or (Get-Item -LiteralPath $Path).Length -eq 0) {
-        throw "Falha do oscdimg. Consulte '$log'."
+    $exitCode = Invoke-BigZNativeCommand $Tools.Oscdimg.Path $isoArgs $log
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf) -or (Get-Item -LiteralPath $Path -ErrorAction Stop).Length -eq 0) {
+        throw (Get-BigZNativeFailure 'oscdimg terminou sem produzir uma ISO não vazia.' $log $exitCode)
     }
 }
