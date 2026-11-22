@@ -3,7 +3,7 @@
 - **Status:** Aceita · **Data:** 2026-11-21 · **Dono:** Tellah · **Revisores:** Cid, Beatrix
 
 ## Contexto
-As referências técnicas têm licenças diferentes. Sem licença, o código é "todos os direitos reservados". A licença do BigZ recomendada é GPL-3.0-or-later (pendente de aprovação do usuário), compatível com código MIT e GPL-3.0 que entra no projeto.
+As referências técnicas têm licenças diferentes. Sem licença, o código é "todos os direitos reservados". A licença do BigZ foi **aprovada pelo usuário: GPL-3.0-or-later (código) + CC BY-SA 4.0 (assets)**. Ela é compatível com código MIT e GPL-3.0 que entra no projeto, e é aprovada pela OSI, o que também viabiliza o SignPath gratuito.
 
 ## Decisão
 | Projeto | Licença encontrada | Regra |
@@ -23,7 +23,7 @@ Processo:
 
 ## Consequências
 - ✅ Evita um risco de DMCA vindo de terceiros (não só da Microsoft).
-- ⚠️ Se a licença final **não** for GPL-3.0 compatível, o reuso do Atlas cai e este ADR precisa ser revisto.
+- ✅ Com a GPL-3.0-or-later aprovada, o reuso de código do Atlas (GPL-3.0) é permitido, com os avisos. Se a licença mudar um dia, revisar este ADR.
 - ⚠️ O tiny11builder pode ter publicado licença depois da consulta; reverificar online antes de qualquer pedido de uso (não verificado online, só no checkout local).
 
 ## Fontes

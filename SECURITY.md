@@ -1,6 +1,6 @@
 # Política de Segurança — BigZ OS
 
-> **Rascunho — não publicado.** O contato marcado como `[CONTATO-SEGURANCA]` ainda será definido pelo mantenedor.
+> **Rascunho — não publicado.** O contato `[CONTATO-SEGURANCA]` e o domínio `[DOMINIO-OFICIAL]` ainda serão definidos pelo mantenedor.
 
 O BigZ OS é um conjunto de scripts e ferramentas open source aplicados sobre o **Windows 11 original e licenciado** do usuário. Não distribuímos imagens nem binários da Microsoft ([ADR-001](docs/decisoes/ADR-001-sem-distribuicao-de-binarios-microsoft.md)). Esta política diz como reportar vulnerabilidades e como verificar que um download é autêntico.
 
@@ -53,7 +53,7 @@ São metas de um projeto voluntário, não garantias contratuais. Daremos crédi
 
 ## Downloads oficiais e verificação
 
-- **Único local de download:** GitHub Releases do repositório oficial `[REPO-OFICIAL]`. O site oficial `[DOMINIO-OFICIAL]` só aponta para lá.
+- **Único local de download:** GitHub Releases do repositório oficial <https://github.com/BigZ-OS/BigZ-OS/releases>. O site oficial `[DOMINIO-OFICIAL]` só aponta para lá.
 - **O BigZ OS nunca distribui ISO.** Qualquer "ISO do BigZ OS" pronta para download **não é nossa** e deve ser tratada como possivelmente maliciosa.
 - Toda release traz `SHA256SUMS.txt` e um **atestado de proveniência** gerado no CI público.
 
@@ -64,7 +64,7 @@ Verifique antes de executar (PowerShell):
 Get-FileHash .\bigz-toolbox-vX.Y.Z.zip -Algorithm SHA256
 
 # 2) Proveniência (requer GitHub CLI): confirma que o arquivo foi gerado pelo CI do repositório oficial
-gh attestation verify .\bigz-toolbox-vX.Y.Z.zip -R [REPO-OFICIAL]
+gh attestation verify .\bigz-toolbox-vX.Y.Z.zip -R BigZ-OS/BigZ-OS
 
 # 3) Assinatura Authenticode dos scripts, quando a release for assinada
 Get-AuthenticodeSignature .\bigz-toolbox\*.ps1 | Format-Table Status, SignerCertificate, Path
