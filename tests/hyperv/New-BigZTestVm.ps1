@@ -79,6 +79,15 @@ if (Test-Path -LiteralPath $vmDir) {
 $hash = (Get-FileHash -LiteralPath $IsoPath -Algorithm SHA256).Hash
 Write-Information "SHA-256 da ISO: $hash" -InformationAction Continue
 
+# ISO gerada pelo builder: confere com o arquivo .sha256 ao lado ("<hash> *<nome>").
+$shaFile = "$IsoPath.sha256"
+if (Test-Path -LiteralPath $shaFile -PathType Leaf) {
+    $expected = (([string](Get-Content -LiteralPath $shaFile -Raw)).Trim() -split '\s+')[0]
+    if ($expected -notmatch '^[0-9A-Fa-f]{64}$') { throw "Arquivo $shaFile sem um SHA-256 válido." }
+    if ($expected -ne $hash) { throw "SHA-256 da ISO NÃO confere com $shaFile (esperado $expected, obtido $hash). Nada foi criado." }
+    Write-Information "SHA-256 confere com $shaFile." -InformationAction Continue
+}
+
 if (-not $PSCmdlet.ShouldProcess($Name, 'Criar VM de teste Hyper-V (Gen2, vTPM, Secure Boot)')) { return }
 
 New-Item -ItemType Directory -Path $vmDir -Force | Out-Null

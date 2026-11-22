@@ -11,7 +11,8 @@ Scripts para criar e operar a VM de teste do BigZ OS e rodar os testes P0 de [`t
 | Script | O que faz |
 |---|---|
 | `Invoke-BigZLab.ps1 -Action …` | **Ponto de entrada único** (uma janela de UAC por ação). Grava transcrição e `last-status.json` em `C:\DEV\BigZ-Lab\logs\`, que agentes não elevados conseguem ler |
-| `New-BigZTestVm.ps1` | Gen2, Secure Boot (modelo Microsoft Windows), vTPM, 4 GB dinâmica (mín. 2 GB, máx. 4 GB), 2 vCPU, VHDX dinâmico de 64 GB, `Default Switch`, ISO no DVD. Registra o SHA-256 da ISO nas Notes |
+| `Invoke-BigZLab.ps1 -Action Baseline` | Checkpoint `limpo` + ligar + P0, com **um único UAC** (depois de instalar e atualizar o Windows) |
+| `New-BigZTestVm.ps1` | Gen2, Secure Boot (modelo Microsoft Windows), vTPM, 4 GB dinâmica (mín. 2 GB, máx. 4 GB), 2 vCPU, VHDX dinâmico de 64 GB, `Default Switch`, ISO no DVD. Registra o SHA-256 da ISO nas Notes e, se existir `<iso>.sha256`, **recusa** uma ISO que não confere |
 | `Start-BigZTestVm.ps1` | Liga a VM (checa "uma por vez" e a memória livre); `-Connect` abre o console |
 | `Checkpoint-BigZTestVm.ps1` | Desliga de forma limpa, ejeta a ISO, põe o disco como 1º boot e cria o checkpoint (padrão `limpo`) |
 | `Restore-BigZTestVm.ps1` | Volta ao checkpoint (padrão `limpo`), descartando o estado atual |

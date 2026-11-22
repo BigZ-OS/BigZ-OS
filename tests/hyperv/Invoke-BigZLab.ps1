@@ -9,6 +9,7 @@
       Start      = Start-BigZTestVm -Connect
       Checkpoint = Checkpoint-BigZTestVm (padrão "limpo")
       Reset      = Restore-BigZTestVm (pede confirmação) + Start-BigZTestVm -Connect
+      Baseline   = Checkpoint-BigZTestVm + Start-BigZTestVm + Invoke-BigZVmP0 (um UAC só, após instalar e atualizar)
       P0         = Invoke-BigZVmP0 (copia, roda e traz os testes P0)
       Remove     = Remove-BigZTestVm (pede confirmação)
       Status     = estado das VMs do laboratório, checkpoints e memória do host (só leitura)
@@ -26,7 +27,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
-    [ValidateSet('Create', 'Start', 'Checkpoint', 'Reset', 'P0', 'Remove', 'Status')]
+    [ValidateSet('Create', 'Start', 'Checkpoint', 'Reset', 'Baseline', 'P0', 'Remove', 'Status')]
     [string]$Action,
 
     [ValidatePattern('^[A-Za-z0-9-]{1,40}$')]
@@ -97,7 +98,11 @@ try {
             & (Join-Path $PSScriptRoot 'Restore-BigZTestVm.ps1') @common -CheckpointName $CheckpointName
             & (Join-Path $PSScriptRoot 'Start-BigZTestVm.ps1') @common -Connect
         }
-        'P0' {
+        { $_ -in 'P0', 'Baseline' } {
+            if ($Action -eq 'Baseline') {
+                & (Join-Path $PSScriptRoot 'Checkpoint-BigZTestVm.ps1') @common -CheckpointName $CheckpointName
+                & (Join-Path $PSScriptRoot 'Start-BigZTestVm.ps1') @common
+            }
             $p0Args = @{ Name = $Name; LabRoot = $LabRoot; Edition = $Edition; Label = $Label }
             if ($InstallPester) { $p0Args['InstallPester'] = $true }
             if ($SkipOnlineSearch) { $p0Args['SkipOnlineSearch'] = $true }

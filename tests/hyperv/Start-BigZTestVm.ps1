@@ -31,8 +31,11 @@ Assert-BigZLabElevation
 Assert-BigZLabHyperV
 
 $vm = Get-BigZLabVm -Name $Name -LabRoot $LabRoot
+$vmconnect = Join-Path $env:SystemRoot 'System32\vmconnect.exe'
+
 if ([string]$vm.State -eq 'Running') {
     Write-Information "A VM '$Name' já está ligada." -InformationAction Continue
+    if ($Connect) { Start-Process -FilePath $vmconnect -ArgumentList 'localhost', $Name }
 }
 else {
     Assert-BigZLabSingleVm -ExceptName $Name
@@ -41,11 +44,12 @@ else {
     if (-not $cap.CanStart) { throw $cap.Reason }
 
     if ($PSCmdlet.ShouldProcess($Name, 'Ligar VM')) {
+        # Abre o console ANTES de ligar: o aviso "Press any key to boot from CD or DVD" expira em poucos segundos.
+        if ($Connect) {
+            Start-Process -FilePath $vmconnect -ArgumentList 'localhost', $Name
+            Start-Sleep -Seconds 4
+        }
         Start-VM -Name $Name
         Write-Information ("VM '{0}' ligada. Memória livre no host antes do boot: {1:N1} GB." -f $Name, ($mem.FreeBytes / 1GB)) -InformationAction Continue
     }
-}
-
-if ($Connect) {
-    Start-Process -FilePath (Join-Path $env:SystemRoot 'System32\vmconnect.exe') -ArgumentList 'localhost', $Name
 }

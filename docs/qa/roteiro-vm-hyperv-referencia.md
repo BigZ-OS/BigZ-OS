@@ -3,6 +3,7 @@
 > Dona: Beatrix · Atualizado: 2026-11-21 · Status: **scripts prontos; nada executado com Hyper-V.**
 > ⛔ = passo que só o **usuário** faz ou aprova (UAC, cadastro, compra de licença).
 > Scripts: [`tests/hyperv/`](../../tests/hyperv/README.md) · Licença: [ADR-010](../decisoes/ADR-010-licenca-das-vms-de-teste.md)
+> Sequência pronta para a primeira ISO do builder: [sequencia-iso-testonly-balanced.md](sequencia-iso-testonly-balanced.md)
 
 ## 0. Este PC e a política de RAM
 
