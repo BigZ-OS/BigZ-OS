@@ -2,7 +2,7 @@
 [CmdletBinding()]
 param(
     [switch]$Plan,
-    [ValidateSet('dev', 'balanced', 'full-performance')][string]$Profile = 'balanced',
+    [Alias('Profile')][ValidateSet('dev', 'balanced', 'full-performance')][string]$EditionProfile = 'balanced',
     [string]$IsoPath,
     [ValidateRange(1, 2147483647)][int]$ImageIndex,
     [string]$OutputPath,
@@ -25,7 +25,7 @@ Import-Module (Join-Path $root 'shared/modules/BigZ.Tweaks/BigZ.Tweaks.psd1') -E
 Import-Module (Join-Path $PSScriptRoot 'modules/BigZ.ProfilePlan.psm1') -ErrorAction Stop
 
 $profileArgs = @{
-    Id = $Profile.ToLowerInvariant()
+    Id = $EditionProfile.ToLowerInvariant()
     ProfilesPath = $ProfilesPath
     CatalogPath = $CatalogPath
     FirstUsePath = $FirstUsePath

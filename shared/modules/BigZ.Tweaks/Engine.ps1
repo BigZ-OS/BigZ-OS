@@ -15,7 +15,7 @@
 
     if (-not $DeclarationOnly) {
         if ($phase -cne 'online') { throw 'A fase offline admite apenas -DeclarationOnly.' }
-        if ($null -eq $Adapter) { $Adapter = New-BigZNativeAdapter }
+        if ($null -eq $Adapter) { $Adapter = Get-BigZNativeAdapter }
         Assert-BigZAdapter $Adapter
     }
 
@@ -38,7 +38,7 @@
 
         if ($tweak.action.type -ceq 'registry.setValue') {
             $target = "$($tweak.action.key)|$($tweak.action.name)"
-            $desired = New-BigZDesiredState $tweak.action
+            $desired = Get-BigZDesiredState $tweak.action
         }
         else {
             $target = $tweak.action.packageName
@@ -129,7 +129,7 @@ function Invoke-BigZJournalEntry {
     param($Entry, $Journal, [string]$Path, $Adapter)
 
     $current = & $Adapter.ReadState $Entry.Action
-    $desired = New-BigZDesiredState $Entry.Action
+    $desired = Get-BigZDesiredState $Entry.Action
     $atDesired = Test-BigZSameState $current $desired
     $atOriginal = Test-BigZSameState $current $Entry.Before
 
@@ -176,7 +176,7 @@ function Invoke-BigZTweak {
     )
 
     if ($DryRun) { return Get-BigZTweakPlan -CatalogPath $CatalogPath -Id $Id -Edition $Edition -Adapter $Adapter }
-    if ($null -eq $Adapter) { $Adapter = New-BigZNativeAdapter }
+    if ($null -eq $Adapter) { $Adapter = Get-BigZNativeAdapter }
     Assert-BigZAdapter $Adapter
     if (-not $PSCmdlet.ShouldProcess($Adapter.TargetId, "Aplicar $($Id -join ', ')")) {
         return Get-BigZTweakPlan -CatalogPath $CatalogPath -Id $Id -Edition $Edition -Adapter $Adapter
@@ -196,7 +196,7 @@ function Invoke-BigZTweak {
             Assert-BigZJournalMatchesPlan $journal $plan
         }
         else {
-            $journal = New-BigZJournal $plan $Adapter.TargetId
+            $journal = Get-BigZInitialJournal $plan $Adapter.TargetId
             Save-BigZJournal $path $journal -Create
         }
         foreach ($entry in $journal.Entries) {
@@ -220,7 +220,7 @@ function Undo-BigZJournalEntry {
     }
 
     $current = & $Adapter.ReadState $Entry.Action
-    $desired = New-BigZDesiredState $Entry.Action
+    $desired = Get-BigZDesiredState $Entry.Action
     if (Test-BigZSameState $current $Entry.Before) {
         $Entry.Status = 'Reverted'
         Save-BigZJournal $Path $Journal
@@ -251,7 +251,7 @@ function Undo-BigZTweak {
         [psobject]$Adapter
     )
 
-    if ($null -eq $Adapter) { $Adapter = New-BigZNativeAdapter }
+    if ($null -eq $Adapter) { $Adapter = Get-BigZNativeAdapter }
     Assert-BigZAdapter $Adapter
     $path = Get-BigZJournalPath $JournalPath
 

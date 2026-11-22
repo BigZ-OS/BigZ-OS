@@ -13,7 +13,7 @@ function Read-BigZProfileJson {
     return ConvertFrom-Json -InputObject $raw -ErrorAction Stop
 }
 
-function Assert-BigZProfileFields {
+function Assert-BigZProfileShape {
     param($Object, [string[]]$Fields, [string]$Label)
 
     if ($Object -isnot [pscustomobject]) { throw "Esperado um objeto em '$Label'." }
@@ -31,7 +31,7 @@ function Assert-BigZProfileVersion {
     }
 }
 
-function Assert-BigZProfileIds {
+function Assert-BigZProfileIdList {
     param($Items, [string]$Label)
 
     if ($Items -isnot [array]) { throw "Esperada uma lista em '$Label'." }
@@ -50,11 +50,11 @@ function Read-BigZProfileChain {
     if ($Visited.ContainsKey($Id)) { throw "Ciclo na herança do perfil '$Id'." }
     $Visited[$Id] = $true
     $data = Read-BigZProfileJson (Join-Path $Path "$Id.json")
-    Assert-BigZProfileFields $data (@('schemaVersion', 'id', 'base') + $script:ProfileLists) $Id
+    Assert-BigZProfileShape $data (@('schemaVersion', 'id', 'base') + $script:ProfileLists) $Id
     Assert-BigZProfileVersion $data.schemaVersion $Id
     if ($data.id -isnot [string] -or $data.id -cne $Id) { throw "ID divergente no perfil '$Id'." }
     foreach ($field in $script:ProfileLists) {
-        Assert-BigZProfileIds $data.$field "$Id.$field"
+        Assert-BigZProfileIdList $data.$field "$Id.$field"
     }
     if ($Id -ceq 'base') {
         if ($null -ne $data.base) { throw 'O perfil base exige base nula.' }
@@ -72,33 +72,33 @@ function Read-BigZFirstUseProfile {
     param([string]$Id, [string]$Path, [string]$AppCatalogPath)
 
     $envelope = Read-BigZProfileJson $Path
-    Assert-BigZProfileFields $envelope @('schemaVersion', 'profiles') 'perfis de primeiro uso'
+    Assert-BigZProfileShape $envelope @('schemaVersion', 'profiles') 'perfis de primeiro uso'
     Assert-BigZProfileVersion $envelope.schemaVersion 'perfis de primeiro uso'
     if ($envelope.profiles -isnot [array]) { throw 'profiles deve ser uma lista.' }
     $profiles = @{}
-    foreach ($profile in $envelope.profiles) {
-        Assert-BigZProfileFields $profile @('id', 'firstUseDefaults', 'firstUseAppDefaults') 'perfil de primeiro uso'
-        if ($profile.id -isnot [string] -or $profile.id -cnotin $script:ProfileIds[1..3] -or $profiles.ContainsKey($profile.id)) {
+    foreach ($entry in $envelope.profiles) {
+        Assert-BigZProfileShape $entry @('id', 'firstUseDefaults', 'firstUseAppDefaults') 'perfil de primeiro uso'
+        if ($entry.id -isnot [string] -or $entry.id -cnotin $script:ProfileIds[1..3] -or $profiles.ContainsKey($entry.id)) {
             throw 'Edição BigZ inválida ou repetida nos perfis de primeiro uso.'
         }
-        Assert-BigZProfileIds $profile.firstUseDefaults "$($profile.id).firstUseDefaults"
-        Assert-BigZProfileIds $profile.firstUseAppDefaults "$($profile.id).firstUseAppDefaults"
-        $profiles[$profile.id] = $profile
+        Assert-BigZProfileIdList $entry.firstUseDefaults "$($entry.id).firstUseDefaults"
+        Assert-BigZProfileIdList $entry.firstUseAppDefaults "$($entry.id).firstUseAppDefaults"
+        $profiles[$entry.id] = $entry
     }
     if (-not $profiles.ContainsKey($Id)) { throw "Perfil de primeiro uso não encontrado para '$Id'." }
 
     $selected = $profiles[$Id]
     if ($selected.firstUseAppDefaults.Count) {
         $apps = Read-BigZProfileJson $AppCatalogPath
-        Assert-BigZProfileFields $apps @('schemaVersion', 'apps') 'catálogo de aplicativos'
+        Assert-BigZProfileShape $apps @('schemaVersion', 'apps') 'catálogo de aplicativos'
         Assert-BigZProfileVersion $apps.schemaVersion 'catálogo de aplicativos'
         if ($apps.apps -isnot [array]) { throw 'apps deve ser uma lista.' }
         foreach ($appId in $selected.firstUseAppDefaults) {
-            $matches = @($apps.apps | Where-Object { $_.id -ceq $appId })
-            if ($matches.Count -ne 1 -or $matches[0].editions -isnot [array] -or $Id -cnotin $matches[0].editions) {
+            $appMatches = @($apps.apps | Where-Object { $_.id -ceq $appId })
+            if ($appMatches.Count -ne 1 -or $appMatches[0].editions -isnot [array] -or $Id -cnotin $appMatches[0].editions) {
                 throw "Aplicativo de primeiro uso '$appId' desconhecido, duplicado ou incompatível com '$Id'."
             }
-            $app = $matches[0]
+            $app = $appMatches[0]
             Assert-BigZProfileVersion $app.schemaVersion $appId
             if ($app.securityImpact -cne 'none' -or $app.risk -cnotin @('low', 'medium') -or
                 $app.phase -cnotin @('online', 'firstUse') -or $app.requires.builds -isnot [array] -or

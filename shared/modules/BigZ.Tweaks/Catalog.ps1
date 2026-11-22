@@ -32,7 +32,7 @@ function Read-BigZJson {
     }
 }
 
-function Assert-BigZFields {
+function Assert-BigZObjectShape {
     param($Value, [string[]]$Required, [string[]]$Optional = @(), [string]$Label)
 
     if ($Value -isnot [pscustomobject]) { throw "$Label deve ser um objeto JSON." }
@@ -78,7 +78,7 @@ function Test-BigZInteger {
 function Assert-BigZRegistryAction {
     param($Action, [string]$Label)
 
-    Assert-BigZFields $Action @('type', 'key', 'name', 'valueType', 'value') -Label $Label
+    Assert-BigZObjectShape $Action @('type', 'key', 'name', 'valueType', 'value') -Label $Label
     if ($Action.type -cne 'registry.setValue' -or $Action.valueType -cne 'DWord' -or
         $Action.key -isnot [string] -or $Action.name -isnot [string] -or
         -not (Test-BigZInteger $Action.value)) {
@@ -98,7 +98,7 @@ function Assert-BigZTweak {
 
     $fields = @('schemaVersion', 'id', 'description', 'risk', 'editions', 'phase', 'scope', 'securityImpact', 'source',
         'requires', 'dependsOn', 'conflictsWith', 'action', 'verify', 'rollback', 'restart')
-    Assert-BigZFields $Tweak $fields -Label $Label
+    Assert-BigZObjectShape $Tweak $fields -Label $Label
     if (-not (Test-BigZInteger $Tweak.schemaVersion) -or $Tweak.schemaVersion -ne 1) {
         throw "schemaVersion incompatível em $Label."
     }
@@ -121,7 +121,7 @@ function Assert-BigZTweak {
     $validateId = { param($item, $field) Assert-BigZId $item $field }
     Assert-BigZList $Tweak.dependsOn "$Label.dependsOn" $validateId
     Assert-BigZList $Tweak.conflictsWith "$Label.conflictsWith" $validateId
-    Assert-BigZFields $Tweak.requires @('builds', 'architectures', 'admin') -Label "$Label.requires"
+    Assert-BigZObjectShape $Tweak.requires @('builds', 'architectures', 'admin') -Label "$Label.requires"
     Assert-BigZList $Tweak.requires.builds "$Label.requires.builds" {
         param($item, $field)
         if (-not (Test-BigZInteger $item) -or $item -le 0 -or $item -gt [int]::MaxValue) {
@@ -134,9 +134,9 @@ function Assert-BigZTweak {
     } -RequireItem
     if ($Tweak.requires.admin -isnot [bool]) { throw "admin deve ser booleano em $Label." }
 
-    Assert-BigZFields $Tweak.action @('type') @('key', 'name', 'valueType', 'value', 'packageName') "$Label.action"
-    Assert-BigZFields $Tweak.verify @('type') -Label "$Label.verify"
-    Assert-BigZFields $Tweak.rollback @('type') -Label "$Label.rollback"
+    Assert-BigZObjectShape $Tweak.action @('type') @('key', 'name', 'valueType', 'value', 'packageName') "$Label.action"
+    Assert-BigZObjectShape $Tweak.verify @('type') -Label "$Label.verify"
+    Assert-BigZObjectShape $Tweak.rollback @('type') -Label "$Label.rollback"
     foreach ($type in @($Tweak.action.type, $Tweak.verify.type, $Tweak.rollback.type, $Tweak.phase, $Tweak.scope)) {
         if ($type -isnot [string]) { throw "Tipo, fase ou escopo inválido em $Label." }
     }
@@ -150,7 +150,7 @@ function Assert-BigZTweak {
             }
         }
         'appx.deprovision' {
-            Assert-BigZFields $Tweak.action @('type', 'packageName') -Label "$Label.action"
+            Assert-BigZObjectShape $Tweak.action @('type', 'packageName') -Label "$Label.action"
             if ($Tweak.action.packageName -isnot [string] -or $Tweak.action.packageName -cnotin $script:BigZOfflinePackages -or
                 $Tweak.phase -cne 'offline' -or $Tweak.scope -cne 'image' -or -not $Tweak.requires.admin -or
                 $Tweak.verify.type -cne 'appx.absent' -or $Tweak.rollback.type -cne 'rebuildImage') {

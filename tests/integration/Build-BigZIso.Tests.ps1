@@ -2,6 +2,7 @@
     BeforeAll {
         $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
         $builder = Join-Path $root 'builder/Build-BigZIso.ps1'
+        if (-not (Test-Path -LiteralPath $builder -PathType Leaf)) { throw "Builder ausente em '$builder'." }
     }
 
     It 'resolve DEV, Balanced e Full Performance sem mídia' {

@@ -41,7 +41,7 @@ function Write-BigZRegistryState {
     }
 }
 
-function New-BigZNativeAdapter {
+function Get-BigZNativeAdapter {
     $windows = Get-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' -ErrorAction Stop
     $sid = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value
     $architecture = $env:PROCESSOR_ARCHITECTURE.ToLowerInvariant()
@@ -71,7 +71,7 @@ function Assert-BigZAdapter {
     }
 }
 
-function New-BigZDesiredState {
+function Get-BigZDesiredState {
     param($Action)
 
     return [pscustomobject]@{ KeyExists = $true; Exists = $true; ValueType = 'DWord'; Value = [int]$Action.value }
@@ -80,7 +80,7 @@ function New-BigZDesiredState {
 function Assert-BigZSnapshot {
     param($State)
 
-    Assert-BigZFields $State @('KeyExists', 'Exists', 'ValueType', 'Value') -Label 'snapshot'
+    Assert-BigZObjectShape $State @('KeyExists', 'Exists', 'ValueType', 'Value') -Label 'snapshot'
     if ($State.KeyExists -isnot [bool] -or -not $State.KeyExists -or $State.Exists -isnot [bool]) {
         throw 'Snapshot exige uma chave de registro existente.'
     }

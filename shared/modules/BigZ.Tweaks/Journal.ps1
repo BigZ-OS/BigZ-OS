@@ -42,7 +42,7 @@ function Read-BigZJournal {
     param([string]$Path, [string]$TargetId)
 
     $journal = Read-BigZJson $Path
-    Assert-BigZFields $journal @('FormatVersion', 'TargetId', 'Edition', 'Intent', 'Entries', 'UpdatedAtUtc') -Label 'diário'
+    Assert-BigZObjectShape $journal @('FormatVersion', 'TargetId', 'Edition', 'Intent', 'Entries', 'UpdatedAtUtc') -Label 'diário'
     if (-not (Test-BigZInteger $journal.FormatVersion) -or $journal.FormatVersion -ne 1 -or
         $journal.TargetId -cne $TargetId -or $journal.Edition -cnotin $script:BigZEditions -or
         $journal.Intent -cnotin @('apply', 'revert') -or $journal.Entries -isnot [array]) {
@@ -52,7 +52,7 @@ function Read-BigZJournal {
     $ids = @{}
     $targets = @{}
     foreach ($entry in $journal.Entries) {
-        Assert-BigZFields $entry @('Id', 'Action', 'Before', 'Status') -Label 'item do diário'
+        Assert-BigZObjectShape $entry @('Id', 'Action', 'Before', 'Status') -Label 'item do diário'
         Assert-BigZId $entry.Id 'ID do diário'
         Assert-BigZRegistryAction $entry.Action "ação do diário '$($entry.Id)'"
         Assert-BigZSnapshot $entry.Before
@@ -68,7 +68,7 @@ function Read-BigZJournal {
     return $journal
 }
 
-function New-BigZJournal {
+function Get-BigZInitialJournal {
     param($Plan, [string]$TargetId)
 
     $entries = foreach ($item in $Plan.Items) {
